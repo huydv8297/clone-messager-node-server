@@ -12,7 +12,7 @@ const assert = require('assert')
 const url = 'mongodb://admin:4hJLoYfz6KaNbdZQ@SG-test-27697:50482,SG-test-27698:50482,SG-test-27699:50482/admin?replicaSet=RS-test-0&ssl=true'
 const dbName = 'test'
 
-const mongo = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongo = new MongoClient(url, { useNewUrlParser: true })
 class Database{
   constructor(){
     mongo.connect((err, client) => {
