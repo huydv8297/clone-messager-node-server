@@ -1,7 +1,6 @@
 'use strict';
 
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
 
 // //localhost database
 // const url = 'mongodb://localhost:27017';
@@ -16,7 +15,6 @@ const mongo = new MongoClient(url, { useNewUrlParser: true });
 class Database{
   constructor(){
     mongo.connect((err, client) => {
-      assert.equal(null, err);
       console.log("Connected successfully to db");
       this.db = client.db(dbName);
       this.client = client;
