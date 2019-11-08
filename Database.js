@@ -3,13 +3,13 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-//localhost database
-const url = 'mongodb://localhost:27017';
-const dbName = 'myproject';
+// //localhost database
+// const url = 'mongodb://localhost:27017';
+// const dbName = 'myproject';
 
 ////online database 
-//const url = 'mongodb+srv://huydv:huydv12345@cluster0-dc94y.mongodb.net/test?retryWrites=true&w=majority'
-//const dbName = 'test';
+const url = 'mongodb+srv://huydv:huydv12345@cluster0-dc94y.mongodb.net/test?retryWrites=true&w=majority'
+const dbName = 'test';
 
 const mongo = new MongoClient(url, { useNewUrlParser: true });
 class Database{
