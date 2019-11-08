@@ -9,7 +9,7 @@ io.on('connection', (socket) => {
 	console.log("Connected successfully to socket.io");    
 });
  
-server.listen(3000, function(){
+server.listen(process.env.PORT || 5000, function(){
   console.log('listening on *:3000');
 });
 
