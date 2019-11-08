@@ -9,7 +9,7 @@ const assert = require('assert')
 
 ////online database 
 //const url = 'mongodb+srv://huydv:huydv12345@cluster0-dc94y.mongodb.net/test?retryWrites=true&w=majority'
-const url = 'mongodb://admin:Huydv@12345@SG-test-27697:50482,SG-test-27698:50482,SG-test-27699:50482/admin?replicaSet=RS-test-0&ssl=true'
+const url = 'mongodb://admin:Huydv%4012345@SG-test-27697:50482,SG-test-27698:50482,SG-test-27699:50482/admin?replicaSet=RS-test-0&ssl=true'
 const dbName = 'test'
 
 const mongo = new MongoClient(url, { useNewUrlParser: true })
