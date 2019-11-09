@@ -21,7 +21,8 @@ class UserController {
                     username : usernameReq,
                     password : passwordReq, 
                     fullname : fullnameReq,
-                    avatar : avatarReq
+                    avatar : avatarReq,
+                    friends : ["huydv"]
                 }
                 self.insertUser(newUser, result =>{
                     respone.json({status : true, data: newUser})
@@ -90,7 +91,8 @@ class UserController {
             _id : 0,
             username : 1,
             fullname : 1,
-            avatar : 1
+            avatar : 1,
+            friends : 1
         }}
 
         database.getAllDocuments('user', query ,filter,(value)=>{
