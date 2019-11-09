@@ -69,7 +69,13 @@ class UserController {
 
     login(request, respone) {
         database.checkAccountLogin(request, (result) =>{
-            respone.json(result)
+            if(result == null){
+                respone.json({message : "false"})
+            }else{
+                result.message = "true"
+                respone.json(result)
+            }
+            
         })
     }
 

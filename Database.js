@@ -98,9 +98,7 @@ class Database{
       callback(result)
     })
   }
-  
 
-  
 }
 
 module.exports = new Database()
