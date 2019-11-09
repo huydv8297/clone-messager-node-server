@@ -11,6 +11,7 @@ class UserController {
         var passwordReq = request.body.password
         var fullnameReq = request.body.fullname
         var avatarReq = request.body.avatar
+        var friendReq = request.body.friends
         let user = {isExist : false}
         
         self.checkUserExist(usernameReq, user).then(() => {
@@ -22,7 +23,7 @@ class UserController {
                     password : passwordReq, 
                     fullname : fullnameReq,
                     avatar : avatarReq,
-                    friends : ["huydv"]
+                    friends :  friendReq
                 }
                 self.insertUser(newUser, result =>{
                     respone.json({status : true, data: newUser})
