@@ -97,7 +97,14 @@ class UserController {
         }}
 
         database.getAllDocuments('user', query ,filter,(value)=>{
-            respone.json(value)
+            if(value == null){
+                respone.json({status : "error"})
+            }else{
+                let user = value[0]
+                user.status ="success"
+                respone.json(user)
+            }
+            
         })
     }
 
