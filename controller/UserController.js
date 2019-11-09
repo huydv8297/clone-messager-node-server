@@ -23,7 +23,7 @@ class UserController {
                     password : passwordReq, 
                     fullname : fullnameReq,
                     avatar : avatarReq,
-                    friends :  friendReq
+                    friends :  JSON.parse(friendReq)
                 }
                 self.insertUser(newUser, result =>{
                     respone.json({status : true, data: newUser})
