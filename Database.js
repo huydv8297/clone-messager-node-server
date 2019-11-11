@@ -28,6 +28,7 @@ class Database{
     var result = collection.insertMany(documents)
     callback(result)
   }
+  
 
   updateDocuments(collectionName, query, filter, callback){
     const collection = this.db.collection(collectionName)

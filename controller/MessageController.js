@@ -29,9 +29,34 @@ class MessageController {
 
     insertMessage(request, respone){
         let chatId = request.body.chatId
-        // let from = 
+        let from = request.body.from
+        let to = request.body.to
+        let content = request.body.content
+        let type = request.body.type
+        let timestamp = new Date().now
+
+        let query = {chatId : chatId}
+        let filter = { $push : {
+            from : from,
+            to : to,
+            content : content,
+            type : type,
+            timestamp : timestamp
+        }}
+
+        database.updateDocuments('message', query, filter, () =>{
+            respone.json({message : true})
+        })
     }
-    
+
+    createNewChat(members){
+        database.insertDocuments('message', {messages : []}, () =>{
+
+        })
+        members.forEach(member => {
+            
+        });
+    }
 }
 
 module.exports = new MessageController()
