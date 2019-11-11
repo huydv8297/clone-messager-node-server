@@ -28,7 +28,6 @@ class UserController {
                     active : true
                 }
 
-                respone.json(newUser)
                 self.insertUser(newUser, result =>{
                     
                     respone.json({message : true, data: result})
