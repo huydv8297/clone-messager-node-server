@@ -63,6 +63,10 @@ class UserController {
         })
     }
 
+    
+
+
+
     checkUserLogin(request, callback){
         let usernameReq =  request.body.username
         let passwordReq = request.body.password
@@ -136,10 +140,9 @@ class UserController {
     }
 
     addChat(request, respone){
-        database.create
-        // database.updateAllDocuments('user', {friends : true}, {$set : {friends : []}}, ()=>{
-        //     respone.json('add chats to all user')
-        // })
+        database.updateAllDocuments('user', {friends : true}, {$set : {friends : []}}, ()=>{
+            respone.json('add chats to all user')
+        })
     }
 
     detail(request, respone) {

@@ -49,13 +49,18 @@ class MessageController {
         })
     }
 
-    createNewChat(members){
-        database.insertDocuments('message', {messages : []}, () =>{
+    createNewChat(request, respone){
+        let members = JSON.parse(request.body.members)
+       
+        database.insertDocuments('message', chat, result =>{
+            let idChat = chat._id
+            members.forEach(member => {
+                database.pushToArray('user', {username : member}, {chats : idChat}, ()=>{})
+            })
 
+            respone.json({message : true})            
         })
-        members.forEach(member => {
-            
-        });
+        
     }
 }
 
