@@ -72,7 +72,7 @@ class Database{
 
     let filter = {$push : doc}
 
-    collection.update(query, filter, {multi : true})
+    collection.update(query, filter)
     callback()
   }
 

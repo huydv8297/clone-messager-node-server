@@ -40,7 +40,7 @@ class MessageController {
         let timestamp = new Date().now
 
         let query = {chatId : chatId}
-        let filter = {
+        let message = {
             messages : {
                 from : from,
                 to : to,
@@ -49,8 +49,8 @@ class MessageController {
                 timestamp : timestamp
         }}
 
-        database.pushToArray('message', query, filter, () =>{
-            respone.json({message : true})
+        database.pushToArray('message', query, message, () =>{
+            respone.json(messages)
         })
     }
 
