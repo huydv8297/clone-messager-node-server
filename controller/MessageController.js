@@ -32,19 +32,23 @@ class MessageController {
     }
 
     insertMessage(request, respone){
-        let chatIdReq = request.params.chatId
+        let chatIdReq = request.params.idChat
         let fromReq = request.body.from
         let toReq = request.body.to
         let contentReq = request.body.content
         let typeReq = request.body.type
-        let timestamp = '11111'
+        let timestamp = Math.floor(new Date().getTime()/1000)
 
         let query = {_id : chatIdReq}
         let message = {
-            messages : "test"
+            from : fromReq,
+            to : toReq,
+            content : contentReq,
+            type : typeReq,
+            timestamp : timestamp
         }
         console.log(chatIdReq)
-        database.pushToArray('message', {_id : chatIdReq}, { messages: "test" }, result =>{
+        database.pushToArray('message', query, { messages: message }, result =>{
             respone.json(result)
         })
 

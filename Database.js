@@ -71,7 +71,6 @@ class Database{
     const collection = this.db.collection(collectionName)
 
     let filter = {$push : doc}
-    console.log(filter)
     try {
       collection.updateOne(query, filter)
       callback({message : true})
