@@ -65,6 +65,7 @@ class UserController {
         let query = {"username" : usernameReq, "password" : passwordReq}
         let filter = {
             _id : 0,
+            password : 0,
             username : 1,
             fullname : 1,
             avatar : 1,
