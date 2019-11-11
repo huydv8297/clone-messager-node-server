@@ -72,8 +72,9 @@ class Database{
 
     let filter = {$push : doc}
     try {
-      collection.updateOne(query, filter)
-      callback({message : true})
+      let doc = collection.updateOne(query, filter)
+
+      callback({message : true, message : doc})
     }
     catch(e){
       callback({message : true, error : e})
