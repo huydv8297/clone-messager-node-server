@@ -50,7 +50,7 @@ class MessageController {
         }}
 
         database.pushToArray('message', query, message, () =>{
-            respone.json(messages)
+            respone.json(message)
         })
     }
 
