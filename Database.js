@@ -28,6 +28,12 @@ class Database{
     var result = collection.insertMany(documents)
     callback(result)
   }
+
+  insertOneDocument(collectionName, document, callback) {
+    const collection = this.db.collection(collectionName)
+    var result = collection.insert(document)
+    callback(result)
+  }
   
 
   updateDocuments(collectionName, query, filter, callback){
@@ -57,6 +63,15 @@ class Database{
 
   updateAllDocuments(collectionName, query, filter, callback){
     const collection = this.db.collection(collectionName)
+    collection.update(query, filter, {multi : true})
+    callback()
+  }
+
+  pushToArray(collectionName, query, doc, callback){
+    const collection = this.db.collection(collectionName)
+
+    let filter = {$push : {doc}}
+
     collection.update(query, filter, {multi : true})
     callback()
   }
