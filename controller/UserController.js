@@ -9,9 +9,9 @@ class UserController {
     register (request, respone) {
         var usernameReq = request.body.username
         var passwordReq = request.body.password
-        var fullnameReq = request.body.fullname
-        var avatarReq = request.body.avatar
-        var friendReq = request.body.friends
+        var fullnameReq = request.body.fullname || "default"
+        var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+        var friendReq = request.body.friends == null ? [] : JSON.parse(friendReq)
         let user = {isExist : false}
         
         self.checkUserExist(usernameReq, user).then(() => {
@@ -24,7 +24,7 @@ class UserController {
                     fullname : fullnameReq,
                     avatar : avatarReq,
                     chats : [],
-                    friends :  friendReq == null ? [] : JSON.parse(friendReq),
+                    friends :  friendReq,
                     active : true
                 }
 
