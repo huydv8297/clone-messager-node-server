@@ -31,9 +31,8 @@ module.exports = function(app) {
 
   app.route('/message')
     .get(messageController.getAllMessages)
+    .get(messageController.createNewChat)
     
-
-
   app.route('/all')
     .get(userController.getAll)
 
