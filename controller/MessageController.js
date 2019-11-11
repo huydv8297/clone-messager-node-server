@@ -49,11 +49,11 @@ class MessageController {
                 timestamp : timestamp
         }}
 
-        database.pushToArray('message', query, message, () =>{
-            
+        database.pushToArray('message', query, message, result =>{
+            respone.json(result)
         })
 
-        respone.json(message)
+        
     }
 
     createNewChat(request, respone){
@@ -62,7 +62,9 @@ class MessageController {
         database.insertOneDocument('message', chat, result =>{
             let idChat = chat._id
             members.forEach(member => {
-                database.pushToArray('user', {username : member}, {chats : idChat}, ()=>{})
+                database.pushToArray('user', {username : member}, {chats : idChat}, result =>{
+                    respone.json(result)
+                })
             })
 
             respone.json({message : true})            

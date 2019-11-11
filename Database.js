@@ -71,9 +71,14 @@ class Database{
     const collection = this.db.collection(collectionName)
 
     let filter = {$push : doc}
-
-    collection.updateOne(query, filter)
-    callback()
+    try {
+      collection.updateOne(query, filter)
+      callback({message : true})
+    }
+    catch(e){
+      callback({message : true, error : e})
+    }
+    
   }
 
   getOneDocument(collectionName, query, filter){
