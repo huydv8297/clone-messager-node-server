@@ -40,6 +40,7 @@ class MessageController {
         let timestamp = Math.floor(new Date().getTime()/1000)
 
         let query = {_id : chatIdReq}
+        console.log(query)
         let message = {
             from : fromReq,
             to : toReq,
