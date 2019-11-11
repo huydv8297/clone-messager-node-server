@@ -15,11 +15,12 @@ class MessageController {
         }
 
         database.getAllDocuments('message', query, filter, value =>{
-            if(!value || !value.length){
-                respone.json({message : false})
-            }else{
-                respone.json(value.messages)
-            }
+            // if(value == null || value.length == 0){
+            //     respone.json(value.messages)
+            // }else{
+            //     respone.json(value.messages)
+            // }
+            respone.json(value.messages)
         })
 
     }
