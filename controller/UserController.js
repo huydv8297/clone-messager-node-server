@@ -24,7 +24,7 @@ class UserController {
                     fullname : fullnameReq,
                     avatar : avatarReq,
                     chats : [],
-                    friends :  friendReq == nul ? [] : JSON.parse(friendReq),
+                    friends :  friendReq == null ? [] : JSON.parse(friendReq),
                     active : true
                 }
 
