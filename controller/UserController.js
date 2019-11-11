@@ -105,11 +105,13 @@ class UserController {
             friends : 1
         }}
 
-        database.getAllDocuments('user', query ,filter,(value)=>{
-            if(value == null){
+        database.getAllDocuments('user', query , filter, value =>{
+            if(!value || !value.length){
                 respone.json({status : "error"})
             }else{
+                console.log(value)
                 let user = value[0]
+                
                 user.status ="success"
                 respone.json(user)
             }
