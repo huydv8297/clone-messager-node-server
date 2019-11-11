@@ -39,7 +39,7 @@ class MessageController {
         let typeReq = request.body.type
         let timestamp = Math.floor(new Date().getTime()/1000)
 
-        let query = {_id : chatIdReq}
+        let query = {_id : "5dc92514c217d100249e2b28"}
         
         let message = {
             from : fromReq,
