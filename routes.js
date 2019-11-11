@@ -29,6 +29,7 @@ module.exports = function(app) {
     .get(messageController.getAllMessages)
 
   app.route('/message')
+    .get(messageController.getAllMessages)
     .post(messageController.createNewChat)
 
   app.route('/all')
