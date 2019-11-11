@@ -58,20 +58,31 @@ class UserController {
         })
     }
 
-    checkAccountLogin(request, callback){
+    checkUserLogin(request, callback){
         let usernameReq =  request.headers.username
         let passwordReq = request.headers.password
     
         const collection = this.db.collection('user')
-    
-        collection.findOne({"username" : usernameReq, "password" : passwordReq})
+        
+
+        let query = {"username" : usernameReq, "password" : passwordReq}
+        let filter = {
+            _id : 0,
+            username : 1,
+            password : 0,
+            fullname : 1,
+            avatar : 1,
+            friends : 1
+        }
+        
+        collection.findOne(query, filter)
         .then( result =>{
           callback(result)
         })
       }
 
     login(request, respone) {
-        database.checkAccountLogin(request, (result) =>{
+        self.checkUserLogin(request, result =>{
             if(result == null){
                 respone.json({message : "false"})
             }else{

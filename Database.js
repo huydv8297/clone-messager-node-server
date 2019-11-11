@@ -87,17 +87,17 @@ class Database{
     })   
   }
 
-  checkAccountLogin(request, callback){
-    let usernameReq =  request.body.username
-    let passwordReq = request.body.password
+  // checkAccountLogin(request, callback){
+  //   let usernameReq =  request.body.username
+  //   let passwordReq = request.body.password
 
-    const collection = this.db.collection('user')
+  //   const collection = this.db.collection('user')
 
-    collection.findOne({"username" : usernameReq, "password" : passwordReq})
-    .then( result =>{
-      callback(result)
-    })
-  }
+  //   collection.findOne({"username" : usernameReq, "password" : passwordReq})
+  //   .then( result =>{
+  //     callback(result)
+  //   })
+  // }
 
 }
 
