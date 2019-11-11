@@ -40,17 +40,16 @@ class MessageController {
         let timestamp = new Date().now
 
         let query = {chatId : chatId}
-        let filter = { $push : {
+        let filter = {
             messages : {
                 from : from,
                 to : to,
                 content : content,
                 type : type,
                 timestamp : timestamp
-            }
         }}
 
-        database.updateDocuments('message', query, filter, () =>{
+        database.pushToArray('message', query, filter, () =>{
             respone.json({message : true})
         })
     }
