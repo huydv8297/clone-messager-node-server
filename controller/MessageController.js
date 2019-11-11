@@ -41,13 +41,8 @@ class MessageController {
 
         let query = {_id : chatIdReq}
         let message = {
-            messages : {
-                from : fromReq,
-                to : toReq,
-                content : contentReq,
-                type : typeReq,
-                timestamp : timestamp
-        }}
+            messages : "test"
+        }
 
         database.pushToArray('message', query, message, result =>{
             respone.json(result)
