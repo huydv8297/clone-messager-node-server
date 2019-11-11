@@ -26,6 +26,11 @@ class MessageController {
         })
 
     }
+
+    insertMessage(request, respone){
+        let chatId = request.body.chatId
+        // let from = 
+    }
     
 }
 

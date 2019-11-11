@@ -24,7 +24,8 @@ class UserController {
                     fullname : fullnameReq,
                     avatar : avatarReq,
                     chats : [],
-                    friends :  JSON.parse(friendReq)
+                    friends :  JSON.parse(friendReq),
+                    active : true
                 }
                 self.insertUser(newUser, result =>{
                     respone.json({message : true, data: result})
@@ -69,7 +70,8 @@ class UserController {
                 fullname : 1,
                 avatar : 1,
                 friends : 1,
-                chats : 1
+                chats : 1, 
+                active : 1
             }
         }
 
@@ -103,6 +105,7 @@ class UserController {
             username : 1,
             fullname : 1,
             avatar : 1,
+            active : 1
         }}
 
         database.getAllDocuments('user', query , filter, value =>{
@@ -129,9 +132,10 @@ class UserController {
     }
 
     addChat(request, respone){
-        database.updateAllDocuments('user', {friends : true}, {$set : {friends : []}}, ()=>{
-            respone.json('add chats to all user')
-        })
+        database.create
+        // database.updateAllDocuments('user', {friends : true}, {$set : {friends : []}}, ()=>{
+        //     respone.json('add chats to all user')
+        // })
     }
 
     detail(request, respone) {
