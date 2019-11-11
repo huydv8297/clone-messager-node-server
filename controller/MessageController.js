@@ -51,7 +51,7 @@ class MessageController {
 
     createNewChat(request, respone){
         let members = JSON.parse(request.body.members)
-       
+        let chat = {messages : []}
         database.insertDocuments('message', chat, result =>{
             let idChat = chat._id
             members.forEach(member => {
