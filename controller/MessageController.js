@@ -32,26 +32,28 @@ class MessageController {
     }
 
     insertMessage(request, respone){
-        let chatId = request.params.chatId
-        let from = request.body.from
-        let to = request.body.to
-        let content = request.body.content
-        let type = request.body.type
+        let chatIdReq = request.params.chatId
+        let fromReq = request.body.from
+        let toReq = request.body.to
+        let contentReq = request.body.content
+        let typeReq = request.body.type
         let timestamp = new Date().now
 
-        let query = {chatId : chatId}
+        let query = {_id : chatIdReq}
         let message = {
             messages : {
-                from : from,
-                to : to,
-                content : content,
-                type : type,
+                from : fromReq,
+                to : toReq,
+                content : contentReq,
+                type : typeReq,
                 timestamp : timestamp
         }}
 
         database.pushToArray('message', query, message, () =>{
-            respone.json(message)
+            
         })
+
+        respone.json(message)
     }
 
     createNewChat(request, respone){
