@@ -25,6 +25,10 @@ module.exports = function(app) {
   app.route('/login')
     .post(userController.login)
   
--  app.route('/message/:idChat')
+  app.route('/message/:idChat')
     .get(messageController.getAllMessages)
+
+  app.route('/all')
+    .get(userController.getAll)
+
 }

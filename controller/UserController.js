@@ -100,22 +100,32 @@ class UserController {
         let filter = {fields: {
             _id : 0,
             username : 1,
+            password : 0,
             fullname : 1,
             avatar : 1,
-            friends : 1
+            friends : 0
         }}
 
         database.getAllDocuments('user', query , filter, value =>{
             if(!value || !value.length){
-                respone.json({status : "error"})
+                respone.json({message : "false"})
             }else{
-                console.log(value)
                 let user = value[0]
                 
-                user.status ="success"
+                user.message ="true"
                 respone.json(user)
             }
             
+        })
+    }
+
+    getAll(request, respone){
+        database.getAllDocuments('user', {}, {}, value =>{
+            if(!value || !value.length){
+                respone.json({message : "false"})
+            }else{
+                respone.json(value)
+            }
         })
     }
 
