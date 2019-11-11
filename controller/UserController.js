@@ -63,13 +63,12 @@ class UserController {
         let passwordReq = request.body.password
 
         let query = {"username" : usernameReq, "password" : passwordReq}
-        let filter = {
-            _id : 0,
-            password : 0,
-            username : 1,
-            fullname : 1,
-            avatar : 1,
-            friends : 0
+        let filter = {projection: {
+                _id : 0,
+                username : 1,
+                fullname : 1,
+                avatar : 1
+            }
         }
 
         database.getOneDocument('user', query, filter).then(result =>{
