@@ -37,7 +37,7 @@ class MessageController {
         let toReq = request.body.to
         let contentReq = request.body.content
         let typeReq = request.body.type
-        let timestamp = new Date().now
+        let timestamp = '11111'
 
         let query = {_id : chatIdReq}
         let message = {
