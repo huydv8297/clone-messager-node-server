@@ -70,7 +70,7 @@ class Database{
   pushToArray(collectionName, query, doc, callback){
     const collection = this.db.collection(collectionName)
 
-    let filter = {$push : {doc}}
+    let filter = {$push : doc}
 
     collection.update(query, filter, {multi : true})
     callback()
