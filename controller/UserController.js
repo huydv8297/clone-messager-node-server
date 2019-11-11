@@ -26,6 +26,7 @@ class UserController {
                     friends :  JSON.parse(friendReq)
                 }
                 self.insertUser(newUser, result =>{
+                    delete newUser._id
                     respone.json({status : true, data: newUser})
                 })
             }
