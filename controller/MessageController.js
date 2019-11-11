@@ -16,16 +16,16 @@ class MessageController {
 
         if(idChat == null){
             database.getAllDocuments('message', {}, {}, value=>{
+                console.log(value)
                 respone.json(value)
             })
-        }else
-
-        database.getAllDocuments('message', query, filter, value =>{
+        }else database.getAllDocuments('message', query, filter, value =>{
             // if(value == null || value.length == 0){
             //     respone.json(value.messages)
             // }else{
             //     respone.json(value.messages)
             // }
+            console.log(value)
             respone.json(value.messages)
         })
 
