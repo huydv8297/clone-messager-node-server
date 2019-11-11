@@ -127,6 +127,10 @@ class UserController {
         })
     }
 
+    addChat(request, respone){
+        database.updateAllDocuments('user', {}, {$set : {"chats" : []}})
+    }
+
     detail(request, respone) {
         console.log('get user')
         respone.json('aaa')

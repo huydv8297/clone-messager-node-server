@@ -31,4 +31,7 @@ module.exports = function(app) {
   app.route('/all')
     .get(userController.getAll)
 
+  app.route('/addChat')
+    .get(userController.addChat)
+
 }

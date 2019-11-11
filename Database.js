@@ -54,6 +54,12 @@ class Database{
     })     
   }
 
+  updateAllDocuments(collectionName, query, filter, callback){
+    const collection = this.db.collection(collectionName)
+    collection.update(query, filter, {multi : true})
+    callback()
+  }
+
   getOneDocument(collectionName, query, filter){
     return new Promise((resolve, reject) =>{
       const collection = this.db.collection(collectionName)
@@ -86,18 +92,6 @@ class Database{
         rows.push(doc)
     })   
   }
-
-  // checkAccountLogin(request, callback){
-  //   let usernameReq =  request.body.username
-  //   let passwordReq = request.body.password
-
-  //   const collection = this.db.collection('user')
-
-  //   collection.findOne({"username" : usernameReq, "password" : passwordReq})
-  //   .then( result =>{
-  //     callback(result)
-  //   })
-  // }
 
 }
 
