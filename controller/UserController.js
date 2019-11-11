@@ -100,10 +100,8 @@ class UserController {
         let filter = {fields: {
             _id : 0,
             username : 1,
-            password : 0,
             fullname : 1,
             avatar : 1,
-            friends : 0
         }}
 
         database.getAllDocuments('user', query , filter, value =>{
