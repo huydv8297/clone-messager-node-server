@@ -129,7 +129,7 @@ class UserController {
     }
 
     addChat(request, respone){
-        database.updateAllDocuments('user', {$exists : false}, {$set : {"active" : true}}, ()=>{
+        database.updateAllDocuments('user', {active : {$exists : false}}, {$set : {"active" : true}}, ()=>{
             respone.json('add chats to all user')
         })
     }
