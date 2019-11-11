@@ -108,7 +108,7 @@ class UserController {
 
         database.getAllDocuments('user', query , filter, value =>{
             if(value == null || value.length == 0){
-                respone.json({message : "false"})
+                respone.json({message : "false", value})
             }else{
                 let user = value[0]
                 
