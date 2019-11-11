@@ -43,7 +43,7 @@ class MessageController {
         let message = {
             messages : "test"
         }
-
+        console.log(chatIdReq)
         database.pushToArray('message', {_id : chatIdReq}, { messages: "test" }, result =>{
             respone.json(result)
         })
