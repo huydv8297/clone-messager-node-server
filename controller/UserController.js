@@ -69,7 +69,7 @@ class UserController {
             username : 1,
             fullname : 1,
             avatar : 1,
-            friends : 1
+            friends : 0
         }
 
         database.getOneDocument('user', query, filter).then(result =>{
