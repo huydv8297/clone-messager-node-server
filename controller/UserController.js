@@ -61,9 +61,6 @@ class UserController {
     checkUserLogin(request, callback){
         let usernameReq =  request.headers.username
         let passwordReq = request.headers.password
-    
-        const collection = this.db.collection('user')
-        
 
         let query = {"username" : usernameReq, "password" : passwordReq}
         let filter = {
@@ -74,11 +71,11 @@ class UserController {
             avatar : 1,
             friends : 1
         }
-        
-        collection.findOne(query, filter)
-        .then( result =>{
-          callback(result)
+
+        database.getOneDocument('user', query, filter).then(result =>{
+            callback(result)
         })
+
       }
 
     login(request, respone) {
