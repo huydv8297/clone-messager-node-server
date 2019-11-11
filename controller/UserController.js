@@ -59,8 +59,8 @@ class UserController {
     }
 
     checkUserLogin(request, callback){
-        let usernameReq =  request.headers.username
-        let passwordReq = request.headers.password
+        let usernameReq =  request.body.username
+        let passwordReq = request.body.password
 
         let query = {"username" : usernameReq, "password" : passwordReq}
         let filter = {
