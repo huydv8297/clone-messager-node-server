@@ -67,7 +67,8 @@ class UserController {
                 _id : 0,
                 username : 1,
                 fullname : 1,
-                avatar : 1
+                avatar : 1,
+                friends : 1
             }
         }
 
