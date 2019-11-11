@@ -44,7 +44,7 @@ class MessageController {
             messages : "test"
         }
 
-        database.pushToArray('message', query, message, result =>{
+        database.pushToArray('message', {_id : chatIdReq}, { messages: "test" }, result =>{
             respone.json(result)
         })
 
