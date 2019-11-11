@@ -26,7 +26,7 @@ class MessageController {
     }
 
     insertMessage(request, respone){
-        let chatId = request.body.chatId
+        let chatId = request.params.chatId
         let from = request.body.from
         let to = request.body.to
         let content = request.body.content
@@ -35,11 +35,13 @@ class MessageController {
 
         let query = {chatId : chatId}
         let filter = { $push : {
-            from : from,
-            to : to,
-            content : content,
-            type : type,
-            timestamp : timestamp
+            messages : {
+                from : from,
+                to : to,
+                content : content,
+                type : type,
+                timestamp : timestamp
+            }
         }}
 
         database.updateDocuments('message', query, filter, () =>{

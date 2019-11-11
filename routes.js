@@ -27,7 +27,7 @@ module.exports = function(app) {
   
   app.route('/message/:idChat')
     .get(messageController.getAllMessages)
-    .post(messageController.createNewChat)
+    .post(messageController.instertMessage)
 
   app.route('/message')
     .get(messageController.getAllMessages)
