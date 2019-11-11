@@ -16,18 +16,18 @@ class UserController {
         
         self.checkUserExist(usernameReq, user).then(() => {
             if(user.isExist)
-                respone.json({status : false, description :'User have been exist!'})
+                respone.json({message : false, description :'User have been exist!'})
             else{
                 var newUser = {
                     username : usernameReq,
                     password : passwordReq, 
                     fullname : fullnameReq,
                     avatar : avatarReq,
+                    chats : [],
                     friends :  JSON.parse(friendReq)
                 }
                 self.insertUser(newUser, result =>{
-                    delete newUser._id
-                    respone.json({status : true, data: newUser})
+                    respone.json({message : true, data: result})
                 })
             }
         })
@@ -68,7 +68,8 @@ class UserController {
                 username : 1,
                 fullname : 1,
                 avatar : 1,
-                friends : 1
+                friends : 1,
+                chats : 1
             }
         }
 
@@ -81,9 +82,9 @@ class UserController {
     login(request, respone) {
         self.checkUserLogin(request, result =>{
             if(result == null){
-                respone.json({message : "false"})
+                respone.json({message : false})
             }else{
-                result.message = "true"
+                result.message = true
                 respone.json(result)
             }
             
@@ -106,11 +107,11 @@ class UserController {
 
         database.getAllDocuments('user', query , filter, value =>{
             if(value == null || value.length == 0){
-                respone.json({message : "false", value})
+                respone.json({message : false, value})
             }else{
                 let user = value[0]
                 
-                user.message ="true"
+                user.message = true
                 respone.json(user)
             }
             
@@ -120,7 +121,7 @@ class UserController {
     getAll(request, respone){
         database.getAllDocuments('user', {}, {}, value =>{
             if(!value || !value.length){
-                respone.json({message : "false"})
+                respone.json({message : false})
             }else{
                 respone.json(value)
             }
@@ -128,7 +129,7 @@ class UserController {
     }
 
     addChat(request, respone){
-        database.updateAllDocuments('user', {}, {$set : {"chats" : []}}, ()=>{
+        database.updateAllDocuments('user', {$exists : false}, {$set : {"active" : true}}, ()=>{
             respone.json('add chats to all user')
         })
     }
