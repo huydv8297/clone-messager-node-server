@@ -29,8 +29,9 @@ class UserController {
                 }
 
                 self.insertUser(newUser, result =>{
-                    
-                    respone.json({message : true, data: result})
+                    newUser.message = true
+                    delete newUser.password
+                    respone.json(newUser)
                 })
             }
         })
