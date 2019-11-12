@@ -176,7 +176,7 @@ class UserController {
                         avatar : avatarReq || user.avatar
                     }
 
-                    database.updateDocuments("user", query, filter, () =>{
+                    database.updateOneDocument("user", query, filter, () =>{
                         respone.json({message : true})
                     })
                     
