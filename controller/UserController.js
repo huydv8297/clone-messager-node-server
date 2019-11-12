@@ -163,7 +163,7 @@ class UserController {
         let fullnameReq = request.body.fullname 
         let avatarReq = request.body.avatar
 
-        self.getUserInfo(username)
+        self.getUserInfo(usernameReq)
             .then(user =>{
                 if(!user.message){
                     respone.json(user)
