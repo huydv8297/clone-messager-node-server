@@ -59,8 +59,6 @@ class MessageController {
         database.pushToArray('message', query, { messages: message }, result =>{
             respone.json(result)
         })
-
-        
     }
 
     createNewChat(request, respone){

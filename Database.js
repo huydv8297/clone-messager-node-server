@@ -20,6 +20,8 @@ class Database{
       console.log("Connected successfully to db")
       this.db = client.db(dbName)
       this.client = client
+
+      console.log(this.db.collection("message").isCapped())
     })
   }
 
