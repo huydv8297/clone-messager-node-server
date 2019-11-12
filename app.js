@@ -1,8 +1,8 @@
 const app = require('express')();
 const server = require('http').createServer(app);
+const socket = require('./SocketServer')(server)
 
 let routes = require('./routes');
-let socket = require('./SocketServer')(server)
 
 routes(app);
 
