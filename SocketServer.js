@@ -14,17 +14,17 @@ class SocketServer{
                 
                 let socket = this.listUserOnline.get('huydv')
                 console.log(Object.getOwnPropertyNames(socket))
-                client.emmit('test', {message : "ahihi"})
+                socket.emit('test', {message : "ahihi"})
             })
         })        
     }
 
     call(eventName, socket, data){
-        socket.emmit(eventName, data)
+        socket.emit(eventName, data)
     }
 
     call(eventName, data){
-        this.socketIO.emmit(eventName, data)
+        this.socketIO.emit(eventName, data)
     }
 
     listen(eventName, callback){
