@@ -130,6 +130,7 @@ class UserController {
                 }else{
                     let user = value[0]
                     user.message = true
+                    console.log("getUserInfo : " + user)
                     resolve(user)
                 }
             })
@@ -177,6 +178,7 @@ class UserController {
                     }
 
                     database.updateOneDocument("user", query, filter, () =>{
+                        console.log("update : " + query +  filter)
                         respone.json({message : true})
                     })
                     
