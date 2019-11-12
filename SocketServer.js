@@ -6,7 +6,7 @@ class SocketServer{
         this.socketIO = new io(server)
         this.listUserOnline = []
 
-        seft.listen('connection', socket => {
+        this.listen('connection', socket => {
             this.listUserOnline.push(socket)
             console.log("Connected successfully to socket.io");    
         })
