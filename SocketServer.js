@@ -11,13 +11,12 @@ class SocketServer{
             console.log("Connected successfully to socket.io")
             client.on('username', data =>{
                 this.listUserOnline.set(data.username, client)
-                console.log(this.listUserOnline.get(data.username))
             })
+
+            this.call('test', this.listUserOnline.get('huydv'), {message : "ahihi"})
         })
 
-        this.listen('username', data =>{
-            this.listUserOnline.set()
-        })
+        
     }
 
     call(eventName, socket, data){

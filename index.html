@@ -8,8 +8,17 @@
 	<script>
 	  var socket = io('http://clonemessage.herokuapp.com');
 	  socket.on('connect', () => {
-		socket.emit('username', { username: 'huydv' });
+		//socket.emit('username', { username: 'huydv' });
 	  });
+
+	  socket.on('test', data =>{
+		  console.log(data);
+	  })
+
+
+	  function call(username){
+		socket.emit('username', { username: 'huydv' });
+	  }
 	</script>
 </body>
 </html>
