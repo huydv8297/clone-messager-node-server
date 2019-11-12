@@ -15,6 +15,9 @@
 		  console.log(data);
 	  })
 
+	  socket.on('message', data =>{
+		  console.log(data);
+	  })
 
 	  function call(user){
 		socket.emit('username', { username: user });

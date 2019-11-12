@@ -17,6 +17,7 @@ class SocketServer{
         })        
 
         this.listen('message', data =>{
+            console.log(data)
             let socket = this.listUser.get(data.to)
             socket.emit('message', data)
         })
