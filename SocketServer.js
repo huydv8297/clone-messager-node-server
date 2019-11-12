@@ -13,6 +13,7 @@ class SocketServer{
                 this.listUserOnline.set(data.username, client)
                 
                 let socket = this.listUserOnline.get('huydv')
+                console.log(Object.getOwnPropertyNames(socket))
                 socket.emmit('test', {message : "ahihi"})
             })
         })        
