@@ -10,7 +10,7 @@ class SocketServer{
         this.listen('connection', client => {
             console.log("Connected successfully to socket.io")
             client.on('username', data =>{
-                this.listUserOnline.set(data.username, client)
+                this.listUser.set(data.username, client)
                 
                 let socket = this.listUser.get('huydv')
             })
