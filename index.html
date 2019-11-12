@@ -24,6 +24,7 @@
 	  }
 
 	  function message(from, to, content){
+		console.log("send message to " + to);
 		socket.emit('message', { from: from, to : to, content : content });
 	  }
 	</script>

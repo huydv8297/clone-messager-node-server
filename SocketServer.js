@@ -10,17 +10,19 @@ class SocketServer{
         this.listen('connection', client => {
             console.log("Connected successfully to socket.io")
             client.on('username', data =>{
+                console.log("add " + data.username + " to list")
                 this.listUser.set(data.username, client)
                 
                 let socket = this.listUser.get('huydv')
             })
+
+            client.on('message', data =>{
+                console.log(data)
+                let socket = this.listUser.get(data.to)
+                socket.emit('message', data)
+            })
         })        
 
-        this.listen('message', data =>{
-            console.log(data)
-            let socket = this.listUser.get(data.to)
-            socket.emit('message', data)
-        })
     }
 
     call(eventName, socket, data){
