@@ -5,18 +5,21 @@ const database = require('./Database')
 class SocketServer{
     constructor(server){
         this.socketIO = new io(server)
-        this.listUserOnline = new Map()
+        this.listUser = new Map()
 
         this.listen('connection', client => {
             console.log("Connected successfully to socket.io")
             client.on('username', data =>{
                 this.listUserOnline.set(data.username, client)
                 
-                let socket = this.listUserOnline.get('huydv')
-                console.log(Object.getOwnPropertyNames(socket))
-                socket.emit('test', {message : "ahihi"})
+                let socket = this.listUser.get('huydv')
             })
         })        
+
+        this.listen('message', data =>{
+            let socket = this.listUser.get(data.to)
+            socket.emit('message', data)
+        })
     }
 
     call(eventName, socket, data){

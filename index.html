@@ -19,6 +19,10 @@
 	  function call(user){
 		socket.emit('username', { username: user });
 	  }
+
+	  function message(from, to, content){
+		socket.emit('message', { from: from, to : to, content : content });
+	  }
 	</script>
 </body>
 </html>
