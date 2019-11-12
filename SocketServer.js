@@ -14,7 +14,7 @@ class SocketServer{
                 
                 let socket = this.listUserOnline.get('huydv')
                 console.log(Object.getOwnPropertyNames(socket))
-                socket.emmit('test', {message : "ahihi"})
+                client.emmit('test', {message : "ahihi"})
             })
         })        
     }
