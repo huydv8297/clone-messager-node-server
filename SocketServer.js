@@ -8,10 +8,10 @@ class SocketServer{
         this.listUserOnline = new Map()
 
         this.listen('connection', client => {
-            console.log("Connected successfully to socket.io");  
+            console.log("Connected successfully to socket.io")
             client.on('username', data =>{
                 this.listUserOnline.set(data.username, client)
-
+                console.log(data)
             })
         })
 
