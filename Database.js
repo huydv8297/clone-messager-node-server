@@ -36,9 +36,9 @@ class Database{
   }
   
 
-  updateDocuments(collectionName, query, filter, callback){
+  updateOneDocument(collectionName, query, filter, callback){
     const collection = this.db.collection(collectionName)
-    var result = collection.update(query, filter)
+    var result = collection.updateOne(query, filter)
     callback(result)
   }
 
@@ -91,28 +91,6 @@ class Database{
       })
     })
    
-  }
-
-  getMessages(query, callback){
-    const collection = this.db.collection('message')
-
-    // collection.aggregate(query, (error, data) => {
-    //   callback(error, data)
-    // })
-    var cursor = collection.find(
-      {"data.from" : "huydv"},
-      {data :{
-        $elemMatch :{
-          from : "huydv"}}
-      })
-
-    var rows = []
-    cursor.each((err, doc) => {
-      if(doc == null)
-        callback(rows)
-      else 
-        rows.push(doc)
-    })   
   }
 
 }
