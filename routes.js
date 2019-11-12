@@ -14,8 +14,9 @@ module.exports = function(app) {
   })
 
   // todoList Routes
-  app.route('/register')
+  app.route('/user')
     .post(userController.register)
+    
 
   app.route('/user/:username')
     .get(userController.get)

@@ -107,6 +107,34 @@ class UserController {
     get (request, respone) {
         let usernameReq = request.params.username
 
+        self.getUserInfo(usernameReq)
+            .then( result =>{
+                respone.json(result)
+            })
+
+        // let query = {username : usernameReq}
+        // let filter = {fields: {
+        //     _id : 0,
+        //     username : 1,
+        //     fullname : 1,
+        //     avatar : 1,
+        //     active : 1
+        // }}
+
+        // database.getAllDocuments('user', query , filter, value =>{
+        //     if(value == null || value.length == 0){
+        //         respone.json({message : false, value})
+        //     }else{
+        //         let user = value[0]
+                
+        //         user.message = true
+        //         respone.json(user)
+        //     }
+            
+        // })
+    }
+
+    getUserInfo(usernameReq){
         let query = {username : usernameReq}
         let filter = {fields: {
             _id : 0,
@@ -116,16 +144,16 @@ class UserController {
             active : 1
         }}
 
-        database.getAllDocuments('user', query , filter, value =>{
-            if(value == null || value.length == 0){
-                respone.json({message : false, value})
-            }else{
-                let user = value[0]
-                
-                user.message = true
-                respone.json(user)
-            }
-            
+        return new Promise((resolve, reject) =>{
+            database.getAllDocuments('user', query , filter, value =>{
+                if(value == null || value.length == 0){
+                    resolve({message : false, value})
+                }else{
+                    let user = value[0]
+                    user.message = true
+                    resolve(user)
+                }
+            })
         })
     }
 
@@ -151,8 +179,17 @@ class UserController {
     }
 
     update(request, respone) {
-        console.log('get user')
-        respone.json('aaa')
+        let username = request.params.username
+
+        self.getUserInfo(username)
+            .then(result =>{
+
+            })
+        
+        // var passwordReq = request.body.password
+        // var fullnameReq = request.body.fullname || "default"
+        // var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+        // respone.json('aaa')
     }
 
     store(request, respone) {
