@@ -44,7 +44,7 @@ class MessageController {
         let typeReq = request.body.type
         let timestamp = Math.floor(new Date().getTime()/1000)
 
-        let query = {_id : "5dc92514c217d100249e2b28"}
+        let query = {_id : chatIdReq}
         
         let message = {
             from : fromReq,
@@ -55,7 +55,7 @@ class MessageController {
         }
         console.log(message)
         console.log(chatIdReq)
-        database.pushToArray('message', query, { messages: "tesst" }, result =>{
+        database.pushToArray('message', query, { messages: message }, result =>{
             respone.json(result)
         })
 
