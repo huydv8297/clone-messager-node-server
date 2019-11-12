@@ -16,12 +16,9 @@ const mongo = new MongoClient(url, { useNewUrlParser: true })
 class Database {
   constructor() {
     mongo.connect((err, client) => {
-      console.log(err)
       console.log("Connected successfully to db")
       this.db = client.db(dbName)
       this.client = client
-
-      console.log(this.db.collection("message").isCapped())
     })
   }
 
