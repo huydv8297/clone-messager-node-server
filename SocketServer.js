@@ -12,6 +12,7 @@ class SocketServer{
             client.on('username', data =>{
                 this.listUserOnline.set(data.username, client)
                 console.log(data)
+                console.log(this.listUserOnline.get("huydv"))
             })
         })
 
