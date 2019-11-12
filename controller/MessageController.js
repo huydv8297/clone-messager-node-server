@@ -1,6 +1,7 @@
 'use strict'
 
 const database = require('../Database')
+const ObjectID = require('mongodb').ObjectID;
 
 class MessageController { 
     constructor (){
@@ -44,7 +45,7 @@ class MessageController {
         let typeReq = request.body.type
         let timestamp = Math.floor(new Date().getTime()/1000)
 
-        let query = {_id : chatIdReq}
+        let query = {_id : ObjectID(chatIdReq)}
         
         let message = {
             from : fromReq,
