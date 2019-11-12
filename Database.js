@@ -13,8 +13,8 @@ const url = 'mongodb://admin:4hJLoYfz6KaNbdZQ@SG-test-27697.servers.mongodirecto
 const dbName = 'test'
 
 const mongo = new MongoClient(url, { useNewUrlParser: true })
-class Database{
-  constructor(){
+class Database {
+  constructor() {
     mongo.connect((err, client) => {
       console.log(err)
       console.log("Connected successfully to db")
@@ -36,71 +36,69 @@ class Database{
     var result = collection.insert(document)
     callback(result)
   }
-  
 
-  updateOneDocument(collectionName, query, filter, callback){
+
+  updateOneDocument(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
-    collection.updateOne(query, filter, (error , result) =>{
-      
+    collection.updateOne(query, filter, (error, result) => {
+
       callback(result)
-    }) 
-    
+    })
+
   }
 
-  deleteDocument(collectionName, condition, callback){
+  deleteDocument(collectionName, condition, callback) {
     const collection = this.db.collection(collectionName)
     var result = collection.remove(condition)
     callback(result)
   }
 
-  getAllDocuments(collectionName, query, filter, callback){
+  getAllDocuments(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
 
     var cursor = collection.find(query, filter)
     var rows = []
     cursor.each((err, doc) => {
-      if(doc == null)
-        callback(rows) 
-      else 
+      if (doc == null)
+        callback(rows)
+      else
         rows.push(doc)
-    })     
+    })
   }
 
-  updateAllDocuments(collectionName, query, filter, callback){
+  updateAllDocuments(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
-    collection.update(query, filter, {multi : true})
+    collection.update(query, filter, { multi: true })
     callback()
   }
 
-  pushToArray(collectionName, query, doc, callback){
+  pushToArray(collectionName, query, doc, callback) {
     const collection = this.db.collection(collectionName)
 
-    let filter = {$push : doc}
+    let filter = { $push: doc }
     try {
-      collection.updateOne(query, filter, (error, result) =>{
-        if(error)
-          callback({message : false, error : error})
+      collection.updateOne(query, filter, (error, result) => {
+        if (error)
+          callback({ message: false, error: error })
         else
-          callback({message : true, result : result})
+          callback({ message: true, result: result })
       })
+    }
+    catch (e) {
+      callback({ message: true, error: e })
+    }
 
-      
-    }
-    catch(e){
-      callback({message : true, error : e})
-    }
-    
   }
 
-  getOneDocument(collectionName, query, filter){
-    return new Promise((resolve, reject) =>{
+  getOneDocument(collectionName, query, filter) {
+    return new Promise((resolve, reject) => {
       const collection = this.db.collection(collectionName)
 
-      collection.findOne(query, filter).then( result =>{
+      collection.findOne(query, filter).then(result => {
         resolve(result)
       })
     })
-   
+
   }
 
 }

@@ -16,8 +16,7 @@ class MessageController {
         }
 
         database.getAllDocuments('message', {}, {}, value=>{
-            console.log(value)
-            respone.json(value)
+            respone.json(value[0])
         })
 
         // if(idChat == null){
@@ -34,7 +33,6 @@ class MessageController {
         //     console.log(value)
         //     respone.json(value.messages)
         // })
-
     }
 
     insertMessage(request, respone){
