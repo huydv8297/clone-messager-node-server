@@ -11,7 +11,7 @@ class SocketServer{
             console.log("Connected successfully to socket.io")
             client.on('username', data =>{
                 this.listUserOnline.set(data.username, client)
-                this.call('test', this.listUserOnline.get('huydv'), {message : "ahihi"})
+                this.listUserOnline.get('huydv').emmit('test', {message : "ahihi"})
             })
 
             
