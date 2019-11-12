@@ -71,8 +71,6 @@ class MessageController {
                     respone.json(result)
                 })
             })
-
-            respone.json({message : true})            
         })
         
     }
