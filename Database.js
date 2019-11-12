@@ -38,8 +38,11 @@ class Database{
 
   updateOneDocument(collectionName, query, filter, callback){
     const collection = this.db.collection(collectionName)
-    var result = collection.updateOne(query, filter)
-    callback(result)
+    collection.updateOne(query, filter, (error , result) =>{
+      
+      callback(result)
+    }) 
+    
   }
 
   deleteDocument(collectionName, condition, callback){
@@ -72,9 +75,14 @@ class Database{
 
     let filter = {$push : doc}
     try {
-      let doc = collection.updateOne(query, filter)
+      let doc = collection.updateOne(query, filter, (error, result) =>{
+        if(error)
+          callback({message : false, error : error})
+        else
+          callback({message : true, message : result})
+      })
 
-      callback({message : true, message : doc})
+      
     }
     catch(e){
       callback({message : true, error : e})
