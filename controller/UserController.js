@@ -172,9 +172,11 @@ class UserController {
 
                     let query = {username : usernameReq}
                     let filter = {
-                        password : passwordReq || user.password,
-                        fullname : fullnameReq || user.fullname,
-                        avatar : avatarReq || user.avatar
+                        $set: {
+                            password : passwordReq || user.password,
+                            fullname : fullnameReq || user.fullname,
+                            avatar : avatarReq || user.avatar
+                        }
                     }
 
                     database.updateOneDocument("user", query, filter, () =>{
