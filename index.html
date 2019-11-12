@@ -7,8 +7,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script>
 	  var socket = io('http://clonemessage.herokuapp.com');
-	  socket.on('connect', data => {
-		console.log(data);
+	  socket.on('connect', () => {
 		socket.emit('username', { username: 'huydv' });
 	  });
 	</script>
