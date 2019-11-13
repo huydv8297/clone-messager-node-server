@@ -69,10 +69,6 @@ class UserController {
         })
     }
 
-
-
-
-
     checkUserLogin(request, callback) {
         let usernameReq = request.body.username
         let passwordReq = request.body.password
