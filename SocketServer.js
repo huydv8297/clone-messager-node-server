@@ -31,36 +31,36 @@ class SocketServer{
                 //     messageController.insertMessage()
                 // }
 
-                let request = {
-                    params: {
-                        idChat: data.idChat
-                    },
-                    body: {
-                        from: data.from,
-                        to: data.to,
-                        content: data.content,
-                        type: data.type
-                    }
-                }
+                // let request = {
+                //     params: {
+                //         idChat: data.idChat
+                //     },
+                //     body: {
+                //         from: data.from,
+                //         to: data.to,
+                //         content: data.content,
+                //         type: data.type
+                //     }
+                // }
 
-                let respone = {
-                    json: result =>{
-                        let sender = this.listUser.get(data.from) || client
-                        let receiver = this.listUser.get(data.to)
+                // let respone = {
+                //     json: result =>{
+                //         let sender = this.listUser.get(data.from) || client
+                //         let receiver = this.listUser.get(data.to)
 
-                        if(result.idChat){
-                            sender.emit('message', result.idChat)
-                            receiver.emit('message', result.idChat)
-                        }
+                //         if(result.idChat){
+                //             sender.emit('message', result.idChat)
+                //             receiver.emit('message', result.idChat)
+                //         }
                             
-                    }
-                }
+                //     }
+                // }
 
-                if(idChat == null){
-                    messageController.createNewChat(request, respone)
-                }else{
-                    messageController.insertMessage(request, respone)
-                }
+                // if(idChat == null){
+                //     messageController.createNewChat(request, respone)
+                // }else{
+                //     messageController.insertMessage(request, respone)
+                // }
                 
             })
 
