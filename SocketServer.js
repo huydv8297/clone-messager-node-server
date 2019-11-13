@@ -24,7 +24,11 @@ class SocketServer{
                 socket.emit('message', data)
             })
 
-        })        
+        })
+        
+        this.listen('disconnect', client =>{
+            
+        })
 
     }
 

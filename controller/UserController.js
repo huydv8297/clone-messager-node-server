@@ -109,24 +109,31 @@ class UserController {
     get(request, respone) {
         let usernameReq = request.params.username
 
-        self.getUserInfo(usernameReq)
+        self.getUserInfo(usernameReq, ["_id"])
             .then(result => {
                 respone.json(result)
             })
     }
 
-    getUserInfo(usernameReq) {
+    getUserInfo(usernameReq, hidden) {
         let query = { username: usernameReq }
         let filter = {
             fields: {
-                _id: 0,
+                _id: 1,
                 username: 1,
+                password: 1,
                 fullname: 1,
+                gender:1,
                 avatar: 1,
                 active: 1,
+                friends:1,
                 chats: 1
             }
         }
+
+        hidden.forEach(element => {
+            filter.fields[element] = 0
+        });
 
         return new Promise((resolve, reject) => {
             database.getAllDocuments('user', query, filter, value => {
