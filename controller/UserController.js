@@ -198,7 +198,7 @@ class UserController {
                             gender: genderReq || user.gender,
                             avatar: avatarReq || user.avatar,
                             active: activeReq == "true",
-                            friends: JSON.parse(friendsReq)
+                            friends: friendsReq == null ? user.friends : JSON.parse(friendsReq)
                         }
                     }
 
