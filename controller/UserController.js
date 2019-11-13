@@ -135,7 +135,7 @@ class UserController {
             if(element == "_id")
                 filter.fields[element] = 0
             else
-            delete filter.fields[element]
+                delete filter.fields[element]
         })
 
         console.log(filter)
@@ -179,9 +179,10 @@ class UserController {
         let usernameReq = request.params.username
         let passwordReq = request.body.password
         let fullnameReq = request.body.fullname
+        let genderReq = request.body.gender
         let avatarReq = request.body.avatar
 
-        self.getUserInfo(usernameReq)
+        self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
                 if (!user.message) {
                     respone.json(user)
@@ -192,6 +193,7 @@ class UserController {
                         $set: {
                             password: passwordReq || user.password,
                             fullname: fullnameReq || user.fullname,
+                            gender: genderReq || user.gender,
                             avatar: avatarReq || user.avatar
                         }
                     }
