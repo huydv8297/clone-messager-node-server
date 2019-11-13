@@ -147,7 +147,6 @@ class UserController {
                 } else {
                     let user = value[0]
                     user.message = true
-                    console.log("getUserInfo : " + user)
                     resolve(user)
                 }
             })

@@ -1,6 +1,7 @@
 'use strict'
 const io = require('socket.io')
 const database = require('./Database')
+let messageController = require('./controller/MessageController')
 
 class SocketServer{
     constructor(server){
@@ -19,15 +20,54 @@ class SocketServer{
 
 
             client.on('message', data =>{
-                console.log(data)
-                let socket = this.listUser.get(data.to)
-                socket.emit('message', data)
+                // console.log(data)
+                // let idChat = data.idChat
+                // if(idChat == null){
+                //     messageController.createNewChat(data, id =>{
+                //         let socket = this.listUser.get(data.to)
+                //         socket.emit('idChat', id)
+                //     })
+                // }else{
+                //     messageController.insertMessage()
+                // }
+
+                let request = {
+                    params: {
+                        idChat: data.idChat
+                    },
+                    body: {
+                        from: data.from,
+                        to: data.to,
+                        content: data.content,
+                        type: data.type
+                    }
+                }
+
+                let respone = {
+                    json: result =>{
+                        let sender = this.listUser.get(data.from) || client
+                        let receiver = this.listUser.get(data.to)
+
+                        if(result.idChat){
+                            sender.emit('message', result.idChat)
+                            receiver.emit('message', result.idChat)
+                        }
+                            
+                    }
+                }
+
+                if(idChat == null){
+                    messageController.createNewChat(request, respone)
+                }else{
+                    messageController.insertMessage(request, respone)
+                }
+                
             })
 
         })
         
         this.listen('disconnect', client =>{
-            
+
         })
 
     }

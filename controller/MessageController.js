@@ -34,7 +34,7 @@ class MessageController {
         //     respone.json(value.messages)
         // })
     }
-
+    // insert message by api
     insertMessage(request, respone){
         let chatIdReq = request.params.idChat
         let fromReq = request.body.from
@@ -55,10 +55,12 @@ class MessageController {
         console.log(message)
         console.log(chatIdReq)
         database.pushToArray('message', query, { messages: message }, result =>{
+            result.idChat = idChat
             respone.json(result)
         })
     }
 
+    // create new chat by api
     createNewChat(request, respone){
         let members = JSON.parse(request.body.members)
         let chat = {messages : []}
@@ -66,12 +68,52 @@ class MessageController {
             let idChat = chat._id
             members.forEach(member => {
                 database.pushToArray('user', {username : member}, {chats : idChat}, result =>{
+                    result.idChat = idChat
                     respone.json(result)
                 })
             })
         })
-        
     }
+
+    // //insert message by socket.io
+    // insertMessage(data, callback){
+    //     let chatIdReq = data.idChat
+    //     let fromReq = data.from
+    //     let toReq = data.to
+    //     let contentReq = data.content
+    //     let typeReq = data.type
+    //     let timestamp = Math.floor(new Date().getTime()/1000)
+
+    //     let query = {_id : ObjectID(chatIdReq)}
+        
+    //     let message = {
+    //         from : fromReq,
+    //         to : toReq,
+    //         content : contentReq,
+    //         type : typeReq,
+    //         timestamp : timestamp
+    //     }
+
+    //     database.pushToArray('message', query, { messages: message }, result =>{
+    //         callback(result)
+    //     })
+    // }
+
+    // //create new chat by socket.io
+    // createNewChat(data, callback){
+    //     let members = [data.from, data.to]
+    //     delete data.idChat
+    //     let chat = {messages : [data]}
+    //     database.insertOneDocument('message', chat, result =>{
+    //         let idChat = chat._id
+    //         members.forEach(member => {
+    //             database.pushToArray('user', {username : member}, {chats : idChat}, result =>{
+    //             })
+    //         })
+
+    //         callback(chat._id)
+    //     })
+    // }
 }
 
 module.exports = new MessageController()

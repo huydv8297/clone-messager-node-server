@@ -63,11 +63,28 @@ class Database {
     })
   }
 
+  getAllDocuments(collectionName, query, filter) {
+    return new Promise((resolve, reject) =>{
+      const collection = this.db.collection(collectionName)
+
+      var cursor = collection.find(query, filter)
+      var rows = []
+      cursor.each((err, doc) => {
+        if (doc == null)
+          resolve(rows)
+        else
+          rows.push(doc)
+      })
+    })
+  }
+
   updateAllDocuments(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
     collection.update(query, filter, { multi: true })
     callback()
   }
+
+  
 
   pushToArray(collectionName, query, doc, callback) {
     const collection = this.db.collection(collectionName)
