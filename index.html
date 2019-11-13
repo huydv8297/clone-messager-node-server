@@ -28,7 +28,7 @@
 
 	  socket.on('message', data =>{
 		  console.log(data);
-		  content.innerHTML += '<br/><b>' + data.username + ': </b>' +  data.content;
+		  content.innerHTML += '<br/><b>' + data.from + ': </b>' +  data.content;
 	  })
 
 	  function call(user){

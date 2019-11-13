@@ -10,6 +10,7 @@ class UserController {
         var usernameReq = request.body.username
         var passwordReq = request.body.password
         var fullnameReq = request.body.fullname || "default"
+        var gender = request.body.gender || "Nam"
         var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
         var friendReq = request.body.friends == null ? [] : JSON.parse(friendReq)
         let user = { isExist: false }
@@ -22,6 +23,7 @@ class UserController {
                     username: usernameReq,
                     password: passwordReq,
                     fullname: fullnameReq,
+                    gender: gender,
                     avatar: avatarReq,
                     chats: [],
                     friends: friendReq,
@@ -121,14 +123,15 @@ class UserController {
                 username: 1,
                 fullname: 1,
                 avatar: 1,
-                active: 1
+                active: 1,
+                chats: 1
             }
         }
 
         return new Promise((resolve, reject) => {
             database.getAllDocuments('user', query, filter, value => {
                 if (value == null || value.length == 0) {
-                    resolve({ message: false, value })
+                    resolve({ message: false })
                 } else {
                     let user = value[0]
                     user.message = true
