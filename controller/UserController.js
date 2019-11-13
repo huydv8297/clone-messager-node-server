@@ -109,7 +109,7 @@ class UserController {
     get(request, respone) {
         let usernameReq = request.params.username
 
-        self.getUserInfo(usernameReq, ["_id"])
+        self.getUserInfo(usernameReq, ["_id", "password"])
             .then(result => {
                 respone.json(result)
             })
@@ -120,6 +120,7 @@ class UserController {
         let filter = {
             fields: {
                 _id: 1,
+                password: 1,
                 username: 1,
                 fullname: 1,
                 gender:1,
@@ -131,7 +132,10 @@ class UserController {
         }
 
         hidden.forEach(element => {
-            filter.fields[element] = 0
+            if(element == "_id")
+                filter.fields[element] = 0
+            else
+            delete filter.fields[element]
         })
 
         console.log(filter)
