@@ -106,9 +106,10 @@ class UserController {
 
     get(request, respone) {
         let usernameReq = request.params.username
-
+        console.log("get info")
         self.getUserInfo(usernameReq, ["_id", "password"])
             .then(result => {
+                console.log(result)
                 respone.json(result)
             })
     }
