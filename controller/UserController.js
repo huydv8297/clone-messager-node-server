@@ -14,6 +14,8 @@ class UserController {
         var gender = request.body.gender || "Man"
         var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
         var friendReq = request.body.friends == null ? [] : JSON.parse(request.body.friends)
+        var activeReq = request.body.active || true
+
         console.log(request.body.friends)
         let user = { isExist: false }
 
@@ -29,7 +31,7 @@ class UserController {
                     avatar: avatarReq,
                     chats: [],
                     friends: friendReq,
-                    active: true
+                    active: activeReq
                 }
 
                 self.insertUser(newUser, result => {
@@ -179,6 +181,8 @@ class UserController {
         let fullnameReq = request.body.fullname
         let genderReq = request.body.gender
         let avatarReq = request.body.avatar
+        let activeReq = request.body.active
+        let friendsReq = request.body.friends
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -192,7 +196,9 @@ class UserController {
                             password: passwordReq || user.password,
                             fullname: fullnameReq || user.fullname,
                             gender: genderReq || user.gender,
-                            avatar: avatarReq || user.avatar
+                            avatar: avatarReq || user.avatar,
+                            active: activeReq || user.active,
+                            friends: friendsReq || user.friends
                         }
                     }
 
