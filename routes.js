@@ -1,5 +1,6 @@
 'use strict'
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 module.exports = function(app) {
   let userController = require('./controller/UserController')
@@ -8,6 +9,8 @@ module.exports = function(app) {
   app.use(bodyParser.urlencoded({ extended: false }))
 
   app.use(bodyParser.json())
+
+  app.use(cors())
 
   app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html')
