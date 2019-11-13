@@ -121,7 +121,6 @@ class UserController {
             fields: {
                 _id: 1,
                 username: 1,
-                password: 0,
                 fullname: 1,
                 gender:1,
                 avatar: 1,
