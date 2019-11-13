@@ -14,7 +14,7 @@ class UserController {
         var gender = request.body.gender || "Man"
         var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
         var friendReq = request.body.friends == null ? [] : JSON.parse(request.body.friends)
-        var activeReq = request.body.active || true
+        var activeReq = request.body.active == "true" 
 
         console.log(request.body.friends)
         let user = { isExist: false }
@@ -197,8 +197,8 @@ class UserController {
                             fullname: fullnameReq || user.fullname,
                             gender: genderReq || user.gender,
                             avatar: avatarReq || user.avatar,
-                            active: activeReq || user.active,
-                            friends: friendsReq || user.friends
+                            active: activeReq == "true",
+                            friends: friendsReq || JSON.parse(friendsReq)
                         }
                     }
 
