@@ -16,11 +16,13 @@ class SocketServer{
                 let socket = this.listUser.get('huydv')
             })
 
+
             client.on('message', data =>{
                 console.log(data)
                 let socket = this.listUser.get(data.to)
                 socket.emit('message', data)
             })
+
         })        
 
     }

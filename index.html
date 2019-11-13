@@ -3,6 +3,12 @@
 	<title>Hello world</title>
 </head>
 <body>
+	<div id=content style="width:500;height:300;border:solid gray 0.5px"></div><br/>
+	<input type=text id=text placeholder=Message /><input type=text id=to placeholder=To />
+	<input type=submit onClick=sendMessage() value=Send /><br/>
+	<input type=text id=username />
+	<input type=submit onClick=setUsername() value="Set Username" />
+
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script>
@@ -11,12 +17,18 @@
 		//socket.emit('username', { username: 'huydv' });
 	  });
 
+	  var content = document.getElementById("content")
+	  var message = document.getElementById("text")
+	  var username = document.getElementById("username")
+	  var to = document.getElementById("to")
+
 	  socket.on('test', data =>{
 		  console.log(data);
 	  })
 
 	  socket.on('message', data =>{
 		  console.log(data);
+		  content.innerHTML += '<br/><b>' + data.username + ': </b>' +  data.content;
 	  })
 
 	  function call(user){
@@ -27,6 +39,19 @@
 		console.log("send message to " + to);
 		socket.emit('message', { from: from, to : to, content : content });
 	  }
+
+	 
+
+	  function setUsername(){
+		socket.emit('username', { username: username.value });
+	  }
+
+	  function sendMessage(){
+		socket.emit('message', { from: username.value, to : to.value, content : message.value });
+		content.innerHTML += '<br/><b>' + username.value + ': </b>' +  message.value;
+	  }
+
+	  
 	</script>
 </body>
 </html>
