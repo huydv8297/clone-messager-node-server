@@ -103,8 +103,6 @@ class UserController {
         })
     }
 
-    logout(request, respone) {
-    }
 
     get(request, respone) {
         let usernameReq = request.params.username
@@ -137,8 +135,6 @@ class UserController {
             else
                 delete filter.fields[element]
         })
-
-        console.log(filter)
 
         return new Promise((resolve, reject) => {
             database.getAllDocuments('user', query, filter, value => {
