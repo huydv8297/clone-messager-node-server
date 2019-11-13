@@ -133,7 +133,9 @@ class UserController {
 
         hidden.forEach(element => {
             filter.fields[element] = 0
-        });
+        })
+
+        console.log(filter)
 
         return new Promise((resolve, reject) => {
             database.getAllDocuments('user', query, filter, value => {
