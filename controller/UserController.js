@@ -7,7 +7,7 @@ class UserController {
     }
 
     register(request, respone) {
-        console.log(friendReq)
+        console.log(request.body.friends)
         var usernameReq = request.body.username
         var passwordReq = request.body.password
         var fullnameReq = request.body.fullname || "default"
