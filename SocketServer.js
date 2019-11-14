@@ -19,7 +19,7 @@ class SocketServer{
             })
 
 
-            client.on('message', data =>{
+            client.on('message', dataReq =>{
                 // console.log(data)
                 // let idChat = data.idChat
                 // if(idChat == null){
@@ -30,7 +30,9 @@ class SocketServer{
                 // }else{
                 //     messageController.insertMessage()
                 // }
-                console.log("message event")
+                console.log(dataReq)
+                let data = JSON.parse(dataReq)
+                console.log("JSON.parse")
                 console.log(data)
                 let request = {
                     params: {
