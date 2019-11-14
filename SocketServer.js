@@ -49,8 +49,8 @@ class SocketServer{
                         let receiver = this.listUser.get(data.to)
 
                         if(result.idChat){
-                            sender.emit('message', result.idChat)
-                            receiver.emit('message', result.idChat)
+                            sender.emit('message', {idChat: result.idChat})
+                            receiver.emit('message', {idChat: result.idChat})
                         }
                             
                     }
