@@ -18,7 +18,7 @@ class MessageController {
 
         database.getAllDocuments('message', query, {}, value=>{
             if(idChat)
-                respone.json(value[0])
+                respone.json(value)
             else
                 respone.json(value)
         })
