@@ -66,15 +66,13 @@ class MessageController {
         let members = JSON.parse(request.body.members)
         let chat = {messages : []}
         database.insertOneDocument('message', chat, result =>{
-            let idChat = chat._id
             members.forEach(member => {
-                database.pushToArray('user', {username : member}, {chats : idChat}, result =>{
-                    result.idChat = idChat
-                    
+                database.pushToArray('user', {username : member}, {chats : idChat}, result =>{                    
                 })
             })
-
-            respone.json(result)
+            
+            request.params.idChat = request
+            self.insertMessage(request, respone)
         })
     }
 
@@ -119,4 +117,4 @@ class MessageController {
     // }
 }
 
-module.exports = new MessageController()
+var self = module.exports = new MessageController()
