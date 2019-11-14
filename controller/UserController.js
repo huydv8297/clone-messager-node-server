@@ -129,7 +129,7 @@ class UserController {
                 chats: 1
             }
         }
-
+        console.log("getUserInfo1")
         hidden.forEach(element => {
             if(element == "_id")
                 filter.fields[element] = 0
@@ -137,13 +137,17 @@ class UserController {
                 delete filter.fields[element]
         })
 
+        console.log("getUserInfo2")
+
         return new Promise((resolve, reject) => {
             database.getAllDocuments('user', query, filter, value => {
+                console.log("getUserInfo3")
                 if (value == null || value.length == 0) {
                     resolve({ message: false })
                 } else {
                     let user = value[0]
                     user.message = true
+                    console.log("getUserInfo4")
                     resolve(user)
                 }
             })
