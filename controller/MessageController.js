@@ -71,9 +71,11 @@ class MessageController {
             members.forEach(member => {
                 database.pushToArray('user', {username : member}, {chats : idChat}, result =>{
                     result.idChat = idChat
-                    respone.json(result)
+                    
                 })
             })
+
+            respone.json(result)
         })
     }
 
