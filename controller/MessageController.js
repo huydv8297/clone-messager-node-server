@@ -11,7 +11,7 @@ class MessageController {
         let idChat = request.params.idChat
         let query
         if(idChat)
-            query = {_id : idChat}
+            query = {_id : ObjectID(idChat)}
         else
             query = {}
    
