@@ -62,6 +62,7 @@ class MessageController {
 
     // create new chat by api
     createNewChat(request, respone){
+        console.log(request)
         let members = JSON.parse(request.body.members)
         let chat = {messages : []}
         database.insertOneDocument('message', chat, result =>{

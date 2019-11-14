@@ -46,7 +46,7 @@ class SocketServer{
                         to: data.to,
                         content: data.content,
                         type: data.type,
-                        member: [data.from, data.to]
+                        member: "" + [data.from, data.to]
                     }
                 }
 
