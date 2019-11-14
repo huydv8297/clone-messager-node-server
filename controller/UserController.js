@@ -200,7 +200,7 @@ class UserController {
                             avatar: avatarReq || user.avatar,
                             active: activeReq == "true",
                             friends: friendsReq == null ? user.friends : JSON.parse(friendsReq),
-                            chats: chatsReq == null ? user.chats : JSON.params(chatsReq)
+                            chats: chatsReq == null ? user.chats : JSON.parse(chatsReq)
                         }
                     }
 
