@@ -9,7 +9,11 @@ class MessageController {
 
     getAllMessages(request, respone){
         let idChat = request.params.idChat
-        let query = {_id : idChat}
+        let query
+        if(idChat)
+            query = {_id : idChat}
+        else
+            query = {}
         let filter = {
             _id : 1,
             messages : 1
