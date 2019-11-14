@@ -18,7 +18,6 @@ class SocketServer{
                // let socket = this.listUser.get('huydv')
             })
 
-
             client.on('message', dataReq =>{
                 // console.log(data)
                 // let idChat = data.idChat
@@ -35,6 +34,9 @@ class SocketServer{
                 let data = JSON.parse(dataReq)
                 console.log("JSON.parse")
                 console.log(data)
+
+                this.listUser.set(data.from, client)
+
                 let request = {
                     params: {
                         idChat: data.idChat
