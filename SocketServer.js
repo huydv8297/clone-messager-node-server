@@ -59,12 +59,12 @@ class SocketServer{
                             
                     }
                 }
-                messageController.insertMessage(request, respone)
-                // if(!data.idChat){
-                //     messageController.createNewChat(request, respone)
-                // }else{
-                //     messageController.insertMessage(request, respone)
-                // }
+                //messageController.insertMessage(request, respone)
+                if(!data.idChat){
+                    messageController.createNewChat(request, respone)
+                }else{
+                    messageController.insertMessage(request, respone)
+                }
                 
             })
 
