@@ -14,16 +14,13 @@ class MessageController {
             query = {_id : idChat}
         else
             query = {}
-        let filter = {
-            _id : 1,
-            messages : 1
-        }
+   
 
-        database.getAllDocuments('message', query, filter, value=>{
+        database.getAllDocuments('message', query, {}, value=>{
             if(idChat)
-                respone.json(value)
+                respone.json(value[0])
             else
-            respone.json(value[0])
+                respone.json(value)
         })
 
         // if(idChat == null){
