@@ -30,6 +30,7 @@ class SocketServer{
                 // }else{
                 //     messageController.insertMessage()
                 // }
+                console.log("message")
                 console.log(dataReq)
                 let data = JSON.parse(dataReq)
                 console.log("JSON.parse")
