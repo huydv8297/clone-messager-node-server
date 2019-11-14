@@ -30,7 +30,8 @@ class SocketServer{
                 // }else{
                 //     messageController.insertMessage()
                 // }
-
+                console.log("message event")
+                console.log(data)
                 let request = {
                     params: {
                         idChat: data.idChat
