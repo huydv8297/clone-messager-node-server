@@ -183,6 +183,7 @@ class UserController {
         let avatarReq = request.body.avatar
         let activeReq = request.body.active
         let friendsReq = request.body.friends
+        let chatsReq = request.body.chats
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -198,7 +199,8 @@ class UserController {
                             gender: genderReq || user.gender,
                             avatar: avatarReq || user.avatar,
                             active: activeReq == "true",
-                            friends: friendsReq == null ? user.friends : JSON.parse(friendsReq)
+                            friends: friendsReq == null ? user.friends : JSON.parse(friendsReq),
+                            chats: chatsReq == null ? user.chats : JSON.params(chatsReq)
                         }
                     }
 
