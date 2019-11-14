@@ -53,8 +53,9 @@ class SocketServer{
                         let sender = this.listUser.get(data.from) || client
                         let receiver = this.listUser.get(data.to)
                         if(result.idChat){
-                            sender != null ? sender.emit('message', {idChat: result.idChat}) : console.log("sender null")
-                            receiver != null ? receiver.emit('message', {idChat: result.idChat}) : console.log("receiver null")
+                            data.idChat = result.idChat
+                            sender != null ? sender.emit('message', data) : console.log("sender null")
+                            receiver != null ? receiver.emit('message', data) : console.log("receiver null")
                         }
                             
                     }
