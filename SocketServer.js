@@ -30,9 +30,7 @@ class SocketServer{
                 //     messageController.insertMessage()
                 // }
                 console.log("message")
-                console.log(dataReq)
                 let data = JSON.parse(dataReq)
-                console.log("JSON.parse")
                 console.log(data)
 
                 this.listUser.set(data.from, client)
@@ -61,12 +59,12 @@ class SocketServer{
                             
                     }
                 }
-
-                if(!data.idChat){
-                    messageController.createNewChat(request, respone)
-                }else{
-                    messageController.insertMessage(request, respone)
-                }
+                messageController.insertMessage(request, respone)
+                // if(!data.idChat){
+                //     messageController.createNewChat(request, respone)
+                // }else{
+                //     messageController.insertMessage(request, respone)
+                // }
                 
             })
 
