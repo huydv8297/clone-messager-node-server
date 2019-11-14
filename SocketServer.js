@@ -62,7 +62,7 @@ class SocketServer{
                     }
                 }
 
-                if(idChat == null){
+                if(idChat){
                     messageController.createNewChat(request, respone)
                 }else{
                     messageController.insertMessage(request, respone)
