@@ -52,7 +52,7 @@ class SocketServer{
                             sender != null ? sender.emit('message', data) : console.log("sender null")
                             receiver != null ? receiver.emit('message', data) : console.log("receiver null")
 
-                            console.log(this.listUser)
+                            console.log(this.listUser.keys())
                         }else{
                             console.log("not send")
                         }
