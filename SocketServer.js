@@ -27,7 +27,7 @@ class SocketServer{
                 console.log("message")
                 let data = JSON.parse(dataReq)
                 console.log(data)
-
+                console.log("add " + data.from + " to userlist")
                 this.listUser.set(data.from, client)
 
                 let request = {
