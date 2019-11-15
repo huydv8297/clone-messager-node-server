@@ -74,7 +74,7 @@ class SocketServer{
         })
         
         this.listen('disconnect', client =>{
-
+            console.log("Disconect " + client)
         })
 
     }
