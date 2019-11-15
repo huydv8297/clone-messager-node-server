@@ -13,6 +13,7 @@ class SocketServer{
 
             client.on('username', data =>{
                 //let data = JSON.parse(dataReq)
+                console.log(data)
                 console.log("add " + data.username + " to list")
                 this.listUser.set(data.username, client)
             })
