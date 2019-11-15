@@ -11,11 +11,13 @@ class SocketServer{
         this.listen('connection', client => {
             console.log("Connected successfully to socket.io")
 
-            client.on('username', data =>{
+            client.on('username', dataReq =>{
+                let data = JSON.parse(dataReq)
                 console.log("add " + data.username + " to list")
                 this.listUser.set(data.username, client)
                 
                // let socket = this.listUser.get('huydv')
+
             })
 
             client.on('disconnect', client =>{
