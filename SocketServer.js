@@ -18,17 +18,12 @@ class SocketServer{
                // let socket = this.listUser.get('huydv')
             })
 
+            client.on('disconnect', client =>{
+                console.log("disconect " + client)
+            })
+
             client.on('message', dataReq =>{
-                // console.log(data)
-                // let idChat = data.idChat
-                // if(idChat == null){
-                //     messageController.createNewChat(data, id =>{
-                //         let socket = this.listUser.get(data.to)
-                //         socket.emit('idChat', id)
-                //     })
-                // }else{
-                //     messageController.insertMessage()
-                // }
+
                 console.log("message")
                 let data = JSON.parse(dataReq)
                 console.log(data)
@@ -73,9 +68,7 @@ class SocketServer{
 
         })
         
-        this.listen('disconnect', client =>{
-            console.log("Disconect " + client)
-        })
+        
 
     }
 
