@@ -11,7 +11,7 @@ class MessageController {
         let idChat = request.params.idChat
         let query
         if(idChat)
-            query = {_id : ObjectID(idChat)}
+            query = {_id : ObjectID(idChat), $sortby: {timestamp: -1}}
         else
             query = {}
    
