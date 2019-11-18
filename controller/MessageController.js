@@ -45,7 +45,7 @@ class MessageController {
         let toReq = request.body.to
         let contentReq = request.body.content
         let typeReq = request.body.type
-        let timestamp = Math.floor(new Date().getTime()/1000)
+        let timestamp = Math.floor(new Date().getTime())
 
         let query = {_id : ObjectID(chatIdReq)}
         console.log("insert message")
