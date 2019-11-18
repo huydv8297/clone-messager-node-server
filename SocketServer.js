@@ -49,7 +49,7 @@ class SocketServer{
                         let receiver = this.listUser.get(data.to)
                         if(result.idChat){
                             data.idChat = result.idChat
-                            data.timeStamp = result.timeStamp
+                            data.timestamp = result.timestamp
                             console.log(data)
                             sender != null ? sender.emit('message', data) : console.log("sender null")
                             receiver != null ? receiver.emit('message', data) : console.log("receiver null")
