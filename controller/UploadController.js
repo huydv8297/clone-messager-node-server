@@ -6,6 +6,11 @@ class UploadController{
     constructor(){}
 
     getImage(request, respone){
+        
+    }
+
+
+    uploadImage(request, respone){
         console.log(request.files);
 
         var tmp_path = request.files[0].path;
@@ -17,11 +22,6 @@ class UploadController{
         src.pipe(dest);
         src.on('end', function() { res.send("ok"); });
         src.on('error', function(err) { res.send({error: "upload failed"}); });
-    }
-
-
-    uploadImage(request, respone){
-
     }
 }
 

@@ -56,6 +56,6 @@ module.exports = function(app) {
 
     
 app.post('/upload')
-  .get(upload.any(), uploadController.getImage)
-  .post(uploadController.uploadImage)
+  .get(uploadController.getImage)
+  .post(upload.any(), uploadController.uploadImage)
 }
