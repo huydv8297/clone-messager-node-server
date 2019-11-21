@@ -55,7 +55,7 @@ module.exports = function(app) {
     .get(userController.addChat)
 
     
-app.post('/upload')
-  .get(uploadController.getImage)
-  .post(upload.any(), uploadController.uploadImage)
+  app.route('/upload')
+    .get(uploadController.getImage)
+    .post(upload.any(), uploadController.uploadImage)
 }
