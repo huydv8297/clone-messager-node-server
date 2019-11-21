@@ -20,8 +20,8 @@ class UploadController{
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
         src.pipe(dest);
-        src.on('end', function() { res.send("ok"); });
-        src.on('error', function(err) { res.send({error: "upload failed"}); });
+        src.on('end', function() { respone.send("ok"); });
+        src.on('error', function(err) { respone.send({error: "upload failed"}); });
     }
 }
 
