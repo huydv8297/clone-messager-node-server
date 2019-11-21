@@ -1,10 +1,21 @@
 'use strict'
 var bodyParser = require('body-parser')
 var cors = require('cors')
+var multer = require('multer')
+
+var upload = multer(
+    { 
+        limits: {
+            fieldNameSize: 999999999,
+            fieldSize: 999999999
+        },
+        dest: 'uploads/' }
+    )
 
 module.exports = function(app) {
   let userController = require('./controller/UserController')
   let messageController = require('./controller/MessageController')
+  let uploadController = require('./controller/UploadController')
 
   app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -43,4 +54,8 @@ module.exports = function(app) {
   app.route('/addChat')
     .get(userController.addChat)
 
+    
+app.post('/upload')
+  .get(upload.any(), uploadController.getImage)
+  .post(uploadController.uploadImage)
 }
