@@ -1,15 +1,16 @@
 'use strict'
 var fs = require('fs');
 const database = require('../Database')
+const path = require('path');
 
 class UploadController{
     constructor(){}
 
     getImage(request, respone){
         let imageName = request.params.image
-        let path =  __dirname +  "/../uploads/" + imageName
-        console.log(path)
-        respone.sendFile(path)
+        let imagePath =  path.resolve('/uploads/' + imageName)
+        console.log(imagePath)
+        respone.sendFile(imagePath)
     }
 
 
