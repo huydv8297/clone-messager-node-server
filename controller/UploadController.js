@@ -11,7 +11,7 @@ class UploadController{
 
 
     uploadImage(request, respone){
-        console.log(request.files);
+        console.log(request);
 
         var tmp_path = request.files[0].path;
     
