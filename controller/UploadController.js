@@ -6,16 +6,17 @@ class UploadController{
     constructor(){}
 
     getImage(request, respone){
-        
+        let imageName = request.params.image
+        respone.send()
     }
 
 
     uploadImage(request, respone){
         console.log(request);
 
-        var tmp_path = request.files[0].path;
+        var tmp_path = request.files.path;
     
-        var target_path = 'uploads/' + request.files[0].originalname;
+        var target_path = 'uploads/' + request.files.originalname;
     
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
