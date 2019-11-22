@@ -22,7 +22,7 @@ class UploadController{
             if(error)
                 respone.send(error)
             else
-                respone.send("http://clonemessage.herokuapp.com/upload/" + target_path + '.png')
+                respone.send("http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.png')
         })
     }
 }
