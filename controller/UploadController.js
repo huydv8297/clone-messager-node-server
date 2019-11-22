@@ -1,7 +1,7 @@
 'use strict'
 var fs = require('fs');
 const database = require('../Database')
-const path = require('path');
+const path = require('path')
 
 class UploadController{
     constructor(){}
@@ -15,16 +15,15 @@ class UploadController{
 
 
     uploadImage(request, respone){
-
-        var tmp_path = request.file.path;
-    
-        var target_path = 'uploads/' + request.file.originalname;
-    
-        var src = fs.createReadStream(tmp_path);
-        var dest = fs.createWriteStream(target_path);
-        src.pipe(dest);
-        src.on('end', function() { respone.send(target_path); });
-        src.on('error', function(err) { respone.send({error: "upload failed"}); });
+        let target_path = 'uploads/' + request.file.filename
+        let extention = request.file.mimetype
+        if(extention.ha)
+        fs.rename(target_path, target_path + "." + extention.replace("image/", ""), error =>{
+            if(error)
+                respone.send(error)
+            else
+                respone.send("http://clonemessage.herokuapp.com/upload/" + target_path + '.png')
+        })
     }
 }
 
