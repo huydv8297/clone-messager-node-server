@@ -14,9 +14,9 @@ class UploadController{
     uploadImage(request, respone){
         console.log(request);
 
-        var tmp_path = request.files.path;
+        var tmp_path = request.file.path;
     
-        var target_path = 'uploads/' + request.files.originalname;
+        var target_path = 'uploads/' + request.file.originalname;
     
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
