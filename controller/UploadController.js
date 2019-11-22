@@ -7,7 +7,7 @@ class UploadController{
 
     getImage(request, respone){
         let imageName = request.params.image
-        let path = __dirname +  "/uploads/" + imageName
+        let path =  +  "/app/uploads/" + imageName
         console.log(path)
         respone.sendFile(path)
     }
