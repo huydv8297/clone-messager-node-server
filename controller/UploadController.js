@@ -17,7 +17,6 @@ class UploadController{
     uploadImage(request, respone){
         let target_path = 'uploads/' + request.file.filename
         let extention = request.file.mimetype
-        if(extention.ha)
         fs.rename(target_path, target_path + "." + extention.replace("image/", ""), error =>{
             if(error)
                 respone.send(error)
