@@ -16,12 +16,12 @@ class UploadController{
 
     uploadImage(request, respone){
         let target_path = 'uploads/' + request.file.filename
-        let extention = request.file.mimetype
-        fs.rename(target_path, target_path + "." + extention.replace("image/", ""), error =>{
+        let extention = request.file.mimetype.replace("image/", "")
+        fs.rename(target_path, target_path + "." + extention, error =>{
             if(error)
                 respone.send(error)
             else
-                respone.send("http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.png')
+                respone.send("http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.' + extention)
         })
     }
 }
