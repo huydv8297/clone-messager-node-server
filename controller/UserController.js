@@ -126,7 +126,8 @@ class UserController {
                 avatar: 1,
                 active: 1,
                 friends:1,
-                chats: 1
+                chats: 1,
+                stories: 1
             }
         }
         console.log("getUserInfo1")
@@ -165,8 +166,8 @@ class UserController {
     }
 
     addChat(request, respone) {
-        database.updateAllDocuments('user', { stories: true }, { $set: { stories: [] } }, () => {
-            respone.json('add chats to all user')
+        database.updateAllDocuments('user', {active : true}, { $set: { stories: [] } }, result => {
+            respone.json(result)
         })
     }
 

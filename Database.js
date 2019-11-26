@@ -80,8 +80,13 @@ class Database {
 
   updateAllDocuments(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
-    collection.update(query, filter, { multi: true })
-    callback()
+    let result = collection.updateMany(query, filter, { multi: true }, (error, result)=>{
+      if(error)
+        console.log(error)
+      else
+        console.log(result)
+    })
+    callback(result)
   }
 
   
