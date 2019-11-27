@@ -53,7 +53,6 @@ module.exports = function(app) {
 
   app.route('/addChat')
     .get(userController.addChat)
-  
     
   app.route('/upload')
     .post(upload.single('files'), uploadController.uploadImage)

@@ -5,14 +5,15 @@ const path = require('path')
 const documentName = 'story'
 const prefixPath = '\\w+\\.\\w+$'
 const extention = '\\\.[a-zA-Z]+'
-
+const aDayTime = 10 * 60 * 1000
 class StoryController{
     constructor(){}
 
     getStory(request, respone){
         let storyId = request.params.storyId
+        let timeStart = Math.floor(new Date().getTime()) - aDayTime
         console.log(storyId)
-        database.getOneDocument(documentName, {storyId: storyId},{})
+        database.getOneDocument(documentName, {storyId: storyId, timestamp: {$gt: timeStart}},{})
             .then(result => respone.json(result))
     }
 
@@ -33,12 +34,13 @@ class StoryController{
         let story = {
             storyId: storyId,
             imagePath: imagePath,
+            listView: [],
             timestamp: timestamp
         }
-        database.insertOneDocument(documentName, story, () =>{
-
+        database.insertOneDocument(documentName, story, result =>{
+            respone.json(result)
         })
     }
 }
 
-var self = module.exports = new StoryController()
+module.exports = new StoryController()
