@@ -16,6 +16,7 @@ module.exports = function(app) {
   let userController = require('./controller/UserController')
   let messageController = require('./controller/MessageController')
   let uploadController = require('./controller/UploadController')
+  let storyController = require('./controller/StoryController')
 
   app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -35,7 +36,6 @@ module.exports = function(app) {
   app.route('/user/:username')
     .get(userController.get)
     .put(userController.update)
-    .delete(userController.delete)
 
   app.route('/login')
     .post(userController.login)
@@ -53,11 +53,18 @@ module.exports = function(app) {
 
   app.route('/addChat')
     .get(userController.addChat)
-
+  
     
   app.route('/upload')
     .post(upload.single('files'), uploadController.uploadImage)
 
   app.route('/upload/:image')
     .get(uploadController.getImage)
+
+  app.route('/stories')
+    .get(storyController.getStories)
+    .post(storyController.postStory)
+
+  app.route('/stories/:storyId')
+    .get(storyController.getStory)
 }

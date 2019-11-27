@@ -30,7 +30,7 @@ class Database {
 
   insertOneDocument(collectionName, document, callback) {
     const collection = this.db.collection(collectionName)
-    var result = collection.insert(document)
+    var result = collection.insertOne(document)
     callback(result)
   }
 

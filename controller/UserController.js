@@ -1,7 +1,7 @@
 'use strict'
 
 const database = require('../Database')
-
+const defaultAvatar = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
 class UserController {
     constructor() {
     }
@@ -12,7 +12,7 @@ class UserController {
         var passwordReq = request.body.password
         var fullnameReq = request.body.fullname || "default"
         var gender = request.body.gender || "Man"
-        var avatarReq = request.body.avatar || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+        var avatarReq = request.body.avatar || defaultAvatar
         var friendReq = request.body.friends == null ? [] : JSON.parse(request.body.friends)
         var activeReq = request.body.active == "true" 
 
@@ -79,10 +79,12 @@ class UserController {
                 _id: 0,
                 username: 1,
                 fullname: 1,
+                gender:1,
                 avatar: 1,
-                friends: 1,
+                active: 1,
+                friends:1,
                 chats: 1,
-                active: 1
+                stories: 1
             }
         }
 
@@ -171,11 +173,6 @@ class UserController {
         })
     }
 
-    detail(request, respone) {
-        console.log('get user')
-        respone.json('aaa')
-    }
-
     update(request, respone) {
         let usernameReq = request.params.username
         let passwordReq = request.body.password
@@ -215,15 +212,6 @@ class UserController {
 
     }
 
-    store(request, respone) {
-        console.log('get user')
-        respone.json('aaa')
-    }
-
-    delete(request, respone) {
-        console.log('get user')
-        respone.json('aaa')
-    }
 }
 
 var self = module.exports = new UserController()
