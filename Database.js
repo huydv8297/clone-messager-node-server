@@ -19,6 +19,9 @@ class Database {
       console.log("Connected successfully to db")
       this.db = client.db(dbName)
       this.client = client
+      //Run cron job
+      const job = require('./CronJob')()
+
     })
   }
 

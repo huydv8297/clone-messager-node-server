@@ -5,7 +5,7 @@ const path = require('path')
 const documentName = 'story'
 const prefixPath = '\\w+\\.\\w+$'
 const extention = '\\\.[a-zA-Z]+'
-const aDayTime = 10 * 60 * 1000
+const aDayTime = 24 * 60 * 60 * 1000
 class StoryController{
     constructor(){}
 
@@ -21,6 +21,13 @@ class StoryController{
         
         database.getAllDocuments(documentName, {}, {}, result =>{
             respone.json(result)
+        })
+    }
+
+    cleanExpiredStories(){
+        let timeStart = Math.floor(new Date().getTime()) - aDayTime
+        database.deleteDocument(documentName, {timestamp: {$lt: timeStart}}, result =>{
+            console.log(result)
         })
     }
 
