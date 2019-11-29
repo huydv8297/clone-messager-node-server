@@ -26,4 +26,4 @@ class CallSession {
 
     }
 }
-module.exports = CallSession()
+module.exports = CallSession
