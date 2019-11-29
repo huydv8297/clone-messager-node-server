@@ -7,7 +7,7 @@ class CallController{
     }
 
     getRoom(){
-        let room = CallSession()
+        let room = new CallSession()
         return {apiKey: API_KEY, sessionId: room.session.sessionId, token: room.token}
     }
 
