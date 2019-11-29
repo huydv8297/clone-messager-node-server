@@ -17,6 +17,7 @@ module.exports = function(app) {
   let messageController = require('./controller/MessageController')
   let uploadController = require('./controller/UploadController')
   let storyController = require('./controller/StoryController')
+  let callController = require('./controller/CallController')
 
   app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -66,4 +67,7 @@ module.exports = function(app) {
 
   app.route('/stories/:storyId')
     .get(storyController.getStory)
+
+  app.route('/call')
+    .get(callController.getRoom)
 }
