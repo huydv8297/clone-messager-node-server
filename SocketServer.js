@@ -50,7 +50,7 @@ class SocketServer{
                         if(result.idChat){
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
-
+                            console.log("result.type == 4  " + result.type)
                             if(result.type == 4){
                                 console.log("result.type == 4")
                                 callController.getRoom({
