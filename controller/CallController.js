@@ -6,12 +6,13 @@ class CallController{
 
     }
 
-    getRoom(){
+    getRoom(request, respone){
         let room = new CallSession()
-        return {apiKey: API_KEY, sessionId: room.session.sessionId, token: room.token}
+        room.createSession()
+            .then(session => {
+                respone.json({apiKey: API_KEY, sessionId: session.sessionId, token: room.getToken()})
+            })
     }
-
-    
 }
 
 module.exports = new CallController()

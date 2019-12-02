@@ -9,21 +9,29 @@ class CallSession {
     }
 
     createSession(){
-        opentok.createSession((error, session =>{
-            if(error)
-                console.log('Error create session')
-            else{
-                this.session = session
-            }
-        }))
+        return new Promise((resolve, reject) =>{
+            opentok.createSession((error, session) =>{
+                if(error){
+                    console.log('Error create session')
+                    reject(error)
+                }
+                    
+                else{
+                    console.log(session)
+                    this.session = session
+                    resolve(session)
+                }
+            })
+        })
+        
     
     }
+
 
     getToken(){
         let token = this.session.generateToken()
         this.token = token
         return token
-
     }
 }
 module.exports = CallSession
