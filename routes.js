@@ -68,6 +68,4 @@ module.exports = function(app) {
   app.route('/stories/:storyId')
     .get(storyController.getStory)
 
-  app.route('/call')
-    .get(callController.getRoom)
 }

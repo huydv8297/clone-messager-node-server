@@ -6,11 +6,11 @@ class CallController{
 
     }
 
-    getRoom(request, respone){
+    getRoom(callback){
         let room = new CallSession()
         room.createSession()
             .then(session => {
-                respone.json({apiKey: API_KEY, sessionId: session.sessionId, token: room.getToken()})
+                callback({apiKey: API_KEY, sessionId: session.sessionId, token: room.getToken()})
             })
     }
 }

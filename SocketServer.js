@@ -2,7 +2,7 @@
 const io = require('socket.io')
 const database = require('./Database')
 let messageController = require('./controller/MessageController')
-
+let callController = require('./controller/CallController')
 class SocketServer{
     constructor(server){
         this.socketIO = new io(server)
@@ -50,10 +50,21 @@ class SocketServer{
                         if(result.idChat){
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
+
+                            if(result.type == 4){
+                                callController.getRoom({
+                                    json: result => {
+                                        data.content = result.sessionId  + "," + result.token
+                                    }
+                                })
+                                
+                            }
+
                             console.log(data)
                             sender != null ? sender.emit('message', data) : console.log("sender null")
                             receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-
+                            
+                            
                             console.log(this.listUser.keys())
                         }else{
                             console.log("not send")
