@@ -52,6 +52,7 @@ class SocketServer{
                             data.timestamp = result.timestamp
 
                             if(result.type == 4){
+                                console.log("result.type == 4")
                                 callController.getRoom({
                                     json: session => {
                                         data.content = session.sessionId  + "," + session.token
