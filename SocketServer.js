@@ -55,7 +55,7 @@ class SocketServer{
                                 console.log("result.type == 4")
                                 callController.getRoom(
                                     session => {
-                                        data.content = session.sessionId  + "," + session.token
+                                        data.content = session.sessionId  + ":" + session.token
 
                                         console.log(data)
                                         sender != null ? sender.emit('message', data) : console.log("sender null")
