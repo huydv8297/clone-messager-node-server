@@ -45,7 +45,7 @@ class SocketServer{
 
                 let respone = {
                     json: result =>{
-                        let sender = this.listUser.get(data.from) || client
+                        let sender = client
                         let receiver = this.listUser.get(data.to)
                         if(result.idChat){
                             data.idChat = result.idChat
