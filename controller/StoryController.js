@@ -45,7 +45,7 @@ class StoryController{
             timestamp: timestamp
         }
         database.insertOneDocument(documentName, story, result =>{
-            respone.json(result)
+            respone.json(story)
         })
     }
 }
