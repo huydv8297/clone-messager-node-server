@@ -53,15 +53,15 @@ class SocketServer{
                             console.log("result.type == 4  " + data.type)
                             if(data.type == 4){
                                 console.log("result.type == 4")
-                                callController.getRoom({
-                                    json: session => {
+                                callController.getRoom(
+                                    session => {
                                         data.content = session.sessionId  + "," + session.token
 
                                         console.log(session)
                                         sender != null ? sender.emit('message', data) : console.log("sender null")
                                         receiver != null ? receiver.emit('message', data) : console.log("receiver null")
                                     }
-                                })
+                            )
                                 
                             }
 
