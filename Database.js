@@ -69,11 +69,14 @@ class Database {
   getDocuments(collectionName, query, filter, option, callback) {
     const collection = this.db.collection(collectionName)
 
-    var cursor = collection.find(query, filter).sort(option.sort).limit(option.limit).skip(option.page)
+    var cursor = collection.find(query, filter).sort(option.sort)
     var rows = []
     cursor.each((err, doc) => {
-      if (doc == null)
+      if (doc == null){
         callback(rows)
+        console.log(rows)
+      }
+        
       else
         rows.push(doc)
     })

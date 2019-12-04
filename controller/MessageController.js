@@ -16,7 +16,7 @@ class MessageController {
         else
             query = {}
 
-        database.getDocuments('message', query, {}, {sort: {timestamp: -1}, limit: 10, page: page}, value=>{
+        database.getAllDocuments('message', query, {}, {sort: {"messages.timestamp": 1}, limit: 10, page: page}, value=>{
             if(idChat)
                 respone.json(value[0])
             else
