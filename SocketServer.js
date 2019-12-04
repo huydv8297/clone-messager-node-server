@@ -61,8 +61,7 @@ class SocketServer{
                                         sender != null ? sender.emit('message', data) : console.log("sender null")
                                         receiver != null ? receiver.emit('message', data) : console.log("receiver null")
                                     }
-                            )
-                                
+                                )
                             }else{
                                 console.log(data)
                                 sender != null ? sender.emit('message', data) : console.log("sender null")

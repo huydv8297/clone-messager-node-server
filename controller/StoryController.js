@@ -27,7 +27,7 @@ class StoryController{
     cleanExpiredStories(){
         let timeStart = Math.floor(new Date().getTime()) - aDayTime
         database.deleteDocument(documentName, {timestamp: {$lt: timeStart}}, result =>{
-            console.log(result)
+            // console.log(result)
         })
     }
 
