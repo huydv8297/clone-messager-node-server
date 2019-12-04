@@ -9,7 +9,7 @@ class MessageController {
 
     getAllMessages(request, respone){
         let idChat = request.params.idChat
-        let page = request.params.page
+        let page = parseInt(request.params.page, 10)
         let query
         if(idChat)
             query = {_id : ObjectID(idChat)}
