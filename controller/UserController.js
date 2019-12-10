@@ -238,16 +238,10 @@ class UserController {
                 sendContent.subject = "Forgot password"
                 sendContent.text = "Forgot password"
                 sendContent.html = "New Password is <b>" +  +  "</b>"
-                database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, (error, result) =>{
-                    if(error){
-                        console.log(result)
-                        respone.json({message: false})
-                    }
-                    else {
+                
+                database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, result =>{
                         SendMail(sendContent)
-                        console.log(result)
                         respone.json({message: true})
-                    }
                 })
                 
                 console.log(user)
