@@ -8,7 +8,7 @@ module.exports =  function(){
     var smtpTransport = mailer.createTransport({
         service: "Yandex",
         auth: {
-            user: "lupacexi",
+            user: "lupacexi@yandex.com",
             pass: "huyoilahuy"
         }
     });
