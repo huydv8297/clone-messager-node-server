@@ -14,7 +14,7 @@ module.exports =  function(){
     });
     
     var mail = {
-        from: "Yashwant Chavan <from@gmail.com>",
+        from: "lupacexi@yandex.com",
         to: "lupacexi@gmail.com",
         subject: "Send Email Using Node.js",
         text: "Node.js New world for me",
