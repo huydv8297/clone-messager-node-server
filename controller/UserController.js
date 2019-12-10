@@ -184,6 +184,7 @@ class UserController {
         let friendsReq = request.body.friends
         let chatsReq = request.body.chats
         let storiesReq = request.body.stories
+        let emailRep = request.body.email || "default"
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -201,13 +202,21 @@ class UserController {
                             active: activeReq == "true",
                             friends: friendsReq == null ? user.friends : JSON.parse(friendsReq),
                             chats: chatsReq == null ? user.chats : JSON.parse(chatsReq),
-                            stories: storiesReq == null ? user.stories : JSON.parse(storiesReq)
+                            stories: storiesReq == null ? user.stories : JSON.parse(storiesReq),
+                            email: emailRep
                         }
                     }
 
-                    database.updateOneDocument("user", query, filter, () => {
-                        respone.json({ message: true })
-                    })
+
+                    database.getOneDocument("user", {email: emailRep}, {})
+                        .then(result =>{
+                            if(!result)
+                                database.updateOneDocument("user", query, filter, () => {
+                                    respone.json({ message: true })
+                                })
+                            else
+                                respone({message: false})
+                        })
 
                 }
             })
