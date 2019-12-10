@@ -31,7 +31,8 @@ class UserController {
                     avatar: avatarReq,
                     chats: [],
                     friends: friendReq,
-                    active: activeReq
+                    active: activeReq,
+                    email: null
                 }
 
                 self.insertUser(newUser, result => {
@@ -84,7 +85,8 @@ class UserController {
                 active: 1,
                 friends:1,
                 chats: 1,
-                stories: 1
+                stories: 1,
+                email: 1
             }
         }
 
@@ -170,7 +172,7 @@ class UserController {
     }
 
     addChat(request, respone) {
-        database.updateAllDocuments('user', {}, { $set: { stories: [] } }, result => {
+        database.updateAllDocuments('user', {}, { $set: { email: null } }, result => {
             respone.json(result)
         })
     }
@@ -216,12 +218,21 @@ class UserController {
                                     respone.json({ message: true })
                                 })
                             else
-                                respone({message: false})
+                                respone.json({message: false})
                         })
 
                 }
             })
 
+
+    }
+
+    forgotPassword(request, respone){
+        let username = request.body.username
+        database.getOneDocument("user", {username: username}, {})
+            .then(user =>{
+
+        })
 
     }
 

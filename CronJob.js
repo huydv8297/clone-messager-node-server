@@ -11,4 +11,3 @@ module.exports = () =>{
         console.log('Clean Story');
     }, null, true, TimeZone)
 }
-1010

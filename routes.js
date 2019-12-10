@@ -32,7 +32,7 @@ module.exports = function(app) {
   // todoList Routes
   app.route('/user')
     .post(userController.register)
-    
+
 
   app.route('/user/:username')
     .get(userController.get)
@@ -67,5 +67,8 @@ module.exports = function(app) {
 
   app.route('/stories/:storyId')
     .get(storyController.getStory)
+
+  app.route('/forgot')
+    .post(userController.forgotPassword)
 
 }
