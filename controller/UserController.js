@@ -129,7 +129,8 @@ class UserController {
                 active: 1,
                 friends:1,
                 chats: 1,
-                stories: 1
+                stories: 1,
+                email: 1
             }
         }
         console.log("getUserInfo1")
