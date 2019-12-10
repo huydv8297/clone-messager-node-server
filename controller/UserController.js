@@ -235,9 +235,9 @@ class UserController {
                 let newPassword = Math.random().toString(12).substring(2, 6) + Math.random().toString(12).substring(2, 6)
 
                 sendContent.to = user.email
-                sendContent.subject = "Forgot password"
-                sendContent.text = "Forgot password"
-                sendContent.html = "New Password is <b>" +  newPassword +  "</b>"
+                sendContent.subject = "Quên mật khẩu"
+                sendContent.text = "Quên mật khẩu"
+                sendContent.html = "Mật khẩu mới của bạn là " +  newPassword
                 
                 database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, result =>{
                         SendMail(sendContent)
