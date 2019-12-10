@@ -240,6 +240,7 @@ class UserController {
                 sendContent.html = "New Password is <b>" +  +  "</b>"
                 database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, (error, result) =>{
                     if(error){
+                        console.log(error)
                         respone.json({message: false})
                     }
                     else {
