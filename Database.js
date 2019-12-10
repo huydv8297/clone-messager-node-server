@@ -102,8 +102,8 @@ class Database {
     let result = collection.updateMany(query, filter, { multi: true }, (error, result)=>{
       if(error)
         console.log(error)
-      else
-        console.log(result)
+      // else
+      //   console.log(result)
     })
     callback(result)
   }

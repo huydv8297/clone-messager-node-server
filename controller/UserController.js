@@ -161,7 +161,7 @@ class UserController {
     }
 
     getAll(request, respone) {
-        SendMail()
+        
         database.getAllDocuments('user', {}, {}, value => {
             if (!value || !value.length) {
                 respone.json({ message: false })
@@ -231,9 +231,26 @@ class UserController {
         let username = request.body.username
         database.getOneDocument("user", {username: username}, {})
             .then(user =>{
+                let sendContent = {}
+                let newPassword = Math.random().toString(12).substring(2, 6) + Math.random().toString(12).substring(2, 6)
 
+                sendContent.to = user.email
+                sendContent.subject = "Forgot password"
+                sendContent.text = "Forgot password"
+                sendContent.html = "New Password is <b>" +  +  "</b>"
+                database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, (error, result) =>{
+                    if(error){
+                        respone.json({message: false})
+                    }
+                    else {
+                        SendMail(sendContent)
+                        respone.json({message: true})
+                    }
+                })
+                
+                console.log(user)
+                
         })
-
     }
 
 }

@@ -1,7 +1,7 @@
 var mailer = require("nodemailer");
 
 // Use Smtp Protocol to send Email
-module.exports =  function(){
+module.exports =  function(sendContent){
 
     let clientId = '16735166254-1l19ofghdauj1071dinera1gcrcnrcvj.apps.googleusercontent.com'
     let clientSecret = 'mffcGgFVG3XJ2_DC52u8L2VT'
@@ -15,10 +15,10 @@ module.exports =  function(){
     
     var mail = {
         from: "lupacexi@yandex.com",
-        to: "lupacexi@gmail.com",
-        subject: "Send Email Using Node.js",
-        text: "Node.js New world for me",
-        html: "<b>Node.js New world for me</b>"
+        to: sendContent.to,
+        subject: sendContent.subject,
+        text: sendContent.text,
+        html: sendContent.html
     }
     
     smtpTransport.sendMail(mail, function(error, response){
