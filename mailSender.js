@@ -15,7 +15,7 @@ module.exports =  function(sendContent){
     
     var mail = {
         from: "lupacexi@yandex.com",
-        to: sendContent.to,
+        to: "lupacexi@gmail.com",
         subject: sendContent.subject,
         text: sendContent.text,
         html: sendContent.html
