@@ -237,7 +237,7 @@ class UserController {
                 sendContent.to = user.email
                 sendContent.subject = "Forgot password"
                 sendContent.text = "Forgot password"
-                sendContent.html = "New Password is <b>" +  +  "</b>"
+                sendContent.html = "New Password is <b>" +  newPassword +  "</b>"
                 
                 database.updateOneDocument("user", {username: username}, {$set: {password: newPassword}}, result =>{
                         SendMail(sendContent)
