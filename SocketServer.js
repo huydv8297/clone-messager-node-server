@@ -51,22 +51,24 @@ class SocketServer{
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
                             console.log("result.type == 4  " + data.type)
-                            if(data.type == 4){
-                                console.log("result.type == 4")
-                                callController.getRoom(
-                                    session => {
-                                        data.content = session.sessionId  + ":" + session.token
+                            // if(data.type == 4){
+                            //     console.log("result.type == 4")
+                            //     callController.getRoom(
+                            //         session => {
+                            //             data.content = session.sessionId  + ":" + session.token
 
-                                        console.log(data)
-                                        sender != null ? sender.emit('message', data) : console.log("sender null")
-                                        receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-                                    }
-                                )
-                            }else{
-                                console.log(data)
+                            //             console.log(data)
+                            //             sender != null ? sender.emit('message', data) : console.log("sender null")
+                            //             receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                            //         }
+                            //     )
+                            // }else{
+                            //     console.log(data)
+                            //     sender != null ? sender.emit('message', data) : console.log("sender null")
+                            //     receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                            // }
                                 sender != null ? sender.emit('message', data) : console.log("sender null")
                                 receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-                            }
                             console.log(this.listUser.keys())
                         }else{
                             console.log("not send")
@@ -81,6 +83,40 @@ class SocketServer{
                     messageController.insertMessage(request, respone)
                 }
                 
+            })
+
+            client.on('videoCall', dataReq =>{
+                let data = JSON.parse(dataReq)
+                let caller = this.listUser.get(data.from)
+                let receiver = this.listUser.get(data.to)
+
+                switch(data.status){
+                    case 'CALL':
+                        if(receiver == null){
+                            data.status = 'CANCEL'
+                            caller.emit('videoCall', data)
+                        }else{
+                            callController.getRoom(
+                                session => {
+                                    data.status = 'WAIT'
+                                    data.sessionId = session.sessionId 
+                                    data.token = session.token
+                                    console.log(data)
+                                    
+                                    caller.emit('videoCall', data)
+                                    receiver.emit('videoCall', data)
+                                }
+                            )
+                        } 
+                        break
+                    case 'WAIT':
+
+                        break
+                    case 'ACCEPT': case 'CANCEL': case 'FINISH':
+                        caller.emit('videoCall', data)
+                        receiver.emit('videoCall', data)
+                        break
+                }
             })
 
         })
