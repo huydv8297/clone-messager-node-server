@@ -89,7 +89,7 @@ class SocketServer{
                 let data = JSON.parse(dataReq)
                 let caller = this.listUser.get(data.from)
                 let receiver = this.listUser.get(data.to)
-
+                console.log('onvideocall ' + dataReq)
                 switch(data.status){
                     case 'CALL':
                         if(receiver == null){
