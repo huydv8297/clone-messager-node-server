@@ -51,25 +51,25 @@ class SocketServer{
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
                             console.log("result.type == 4  " + data.type)
-                            // if(data.type == 4){
-                            //     console.log("result.type == 4")
-                            //     callController.getRoom(
-                            //         session => {
-                            //             data.content = session.sessionId  + ":" + session.token
+                            if(data.type == 4){
+                                console.log("result.type == 4")
+                                callController.getRoom(
+                                    session => {
+                                        data.content = session.sessionId  + ":" + session.token
 
-                            //             console.log(data)
-                            //             sender != null ? sender.emit('message', data) : console.log("sender null")
-                            //             receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-                            //         }
-                            //     )
-                            // }else{
-                            //     console.log(data)
-                            //     sender != null ? sender.emit('message', data) : console.log("sender null")
-                            //     receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-                            // }
+                                        console.log(data)
+                                        sender != null ? sender.emit('message', data) : console.log("sender null")
+                                        receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                                    }
+                                )
+                            }else{
+                                console.log(data)
                                 sender != null ? sender.emit('message', data) : console.log("sender null")
                                 receiver != null ? receiver.emit('message', data) : console.log("receiver null")
-                            console.log(this.listUser.keys())
+                            }
+                            //     sender != null ? sender.emit('message', data) : console.log("sender null")
+                            //     receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                            // console.log(this.listUser.keys())
                         }else{
                             console.log("not send")
                         }
