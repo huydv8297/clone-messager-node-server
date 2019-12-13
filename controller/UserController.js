@@ -187,7 +187,7 @@ class UserController {
         let friendsReq = request.body.friends
         let chatsReq = request.body.chats
         let storiesReq = request.body.stories
-        let emailRep = request.body.email || "default"
+        let emailRep = request.body.email
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -211,18 +211,23 @@ class UserController {
                     }
 
                     //check duplicate email
-                    if(emailRep != "default")
-                    database.getOneDocument("user", query, {})
-                        .then(result =>{
-                            console.log("email not found")
-                            if(!result)
-                                database.updateOneDocument("user", query, filter, () => {
-                                    respone.json({ message: true })
-                                })
-                            else
-                                respone.json({message: false})
-                        })
-
+                    
+                        database.getOneDocument("user", query, {})
+                            .then(result =>{
+                                
+                                if(!result || emailRep == null){
+                                    console.log("email not found")
+                                    database.updateOneDocument("user", query, filter, () => {
+                                        respone.json({ message: true })
+                                    })
+                                }
+                                else{
+                                    console.log("found email")
+                                    respone.json({message: false})
+                                }
+                                    
+                            })
+                   
                 }
             })
 
