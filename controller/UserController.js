@@ -187,7 +187,7 @@ class UserController {
         let friendsReq = request.body.friends
         let chatsReq = request.body.chats
         let storiesReq = request.body.stories
-        let emailRep = request.body.email || "default"
+        let emailRep = request.body.email
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
