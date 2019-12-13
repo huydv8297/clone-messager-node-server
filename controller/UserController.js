@@ -30,6 +30,7 @@ class UserController {
                     gender: gender,
                     avatar: avatarReq,
                     chats: [],
+                    stories: [],
                     friends: friendReq,
                     active: activeReq,
                     email: null
@@ -172,7 +173,7 @@ class UserController {
     }
 
     addChat(request, respone) {
-        database.updateAllDocuments('user', {}, { $set: { story: [] } }, result => {
+        database.updateAllDocuments('user', {}, { $set: { stories: [] } }, result => {
             respone.json(result)
         })
     }
