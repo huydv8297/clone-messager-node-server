@@ -206,7 +206,7 @@ class UserController {
                             friends: friendsReq == null ? user.friends : JSON.parse(friendsReq),
                             chats: chatsReq == null ? user.chats : JSON.parse(chatsReq),
                             stories: storiesReq == null ? user.stories : JSON.parse(storiesReq),
-                            email: emailRep
+                            email: emailRep || null
                         }
                     }
 
