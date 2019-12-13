@@ -172,7 +172,7 @@ class UserController {
     }
 
     addChat(request, respone) {
-        database.updateAllDocuments('user', {}, { $set: { email: null } }, result => {
+        database.updateAllDocuments('user', {}, { $set: { story: [] } }, result => {
             respone.json(result)
         })
     }
