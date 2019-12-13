@@ -187,7 +187,7 @@ class UserController {
         let friendsReq = request.body.friends
         let chatsReq = request.body.chats
         let storiesReq = request.body.stories
-        let emailRep = request.body.email || null
+        let emailRep = request.body.email || "default"
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -211,6 +211,7 @@ class UserController {
                     }
 
                     //check duplicate email
+                    if(emailRep != "default")
                     database.getOneDocument("user", query, {})
                         .then(result =>{
                             if(!result)
