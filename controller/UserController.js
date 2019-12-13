@@ -223,8 +223,15 @@ class UserController {
                                     })
                                 }
                                 else{
-                                    console.log("found email")
-                                    respone.json({message: false})
+                                    if(emailRep == null)
+                                        database.updateOneDocument("user", {username: usernameReq}, filter, () => {
+                                            respone.json({ message: true })
+                                        })
+                                    else{
+                                        console.log("found email")
+                                        respone.json({message: false})
+                                    }
+                                    
                                 }
                                     
                             })
