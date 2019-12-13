@@ -187,7 +187,7 @@ class UserController {
         let friendsReq = request.body.friends
         let chatsReq = request.body.chats
         let storiesReq = request.body.stories
-        let emailRep = request.body.email
+        let emailRep = request.body.email || null
 
         self.getUserInfo(usernameReq, ["_id"])
             .then(user => {
@@ -195,7 +195,7 @@ class UserController {
                     respone.json(user)
                 } else {
 
-                    let query = { username: usernameReq }
+                    let query = { email: emailRep }
                     let filter = {
                         $set: {
                             password: passwordReq || user.password,
@@ -206,15 +206,20 @@ class UserController {
                             friends: friendsReq == null ? user.friends : JSON.parse(friendsReq),
                             chats: chatsReq == null ? user.chats : JSON.parse(chatsReq),
                             stories: storiesReq == null ? user.stories : JSON.parse(storiesReq),
-                            email: emailRep || null
+                            email: emailRep || user.email
                         }
                     }
 
-
-                    database.updateOneDocument("user", query, filter, () => {
-                        respone.json({ message: true })
-                    })
-                        
+                    //check duplicate email
+                    database.getOneDocument("user", query, {})
+                        .then(result =>{
+                            if(!result)
+                                database.updateOneDocument("user", query, filter, () => {
+                                    respone.json({ message: true })
+                                })
+                            else
+                                respone.json({message: false})
+                        })
 
                 }
             })
