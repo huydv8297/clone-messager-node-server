@@ -211,7 +211,7 @@ class UserController {
                     }
 
 
-                    database.getOneDocument("user", {email: emailRep}, {})
+                    database.getOneDocument("user", query, {})
                         .then(result =>{
                             if(!result)
                                 database.updateOneDocument("user", query, filter, () => {
