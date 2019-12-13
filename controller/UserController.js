@@ -211,15 +211,10 @@ class UserController {
                     }
 
 
-                    database.getOneDocument("user", query, {})
-                        .then(result =>{
-                            if(!result)
-                                database.updateOneDocument("user", query, filter, () => {
-                                    respone.json({ message: true })
-                                })
-                            else
-                                respone.json({message: false})
-                        })
+                    database.updateOneDocument("user", query, filter, () => {
+                        respone.json({ message: true })
+                    })
+                        
 
                 }
             })
