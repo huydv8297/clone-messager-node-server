@@ -50,14 +50,12 @@ class SocketServer{
                         if(result.idChat){
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
-                            console.log("result.type == 4  " + data.type)
                             if(data.type == 4){
                                 console.log("result.type == 4")
                                 callController.getRoom(
                                     session => {
                                         data.content = session.sessionId  + ":" + session.token
 
-                                        console.log(data)
                                         sender != null ? sender.emit('message', data) : console.log("sender null")
                                         receiver != null ? receiver.emit('message', data) : console.log("receiver null")
                                     }
@@ -102,7 +100,7 @@ class SocketServer{
                                     data.sessionId = session.sessionId 
                                     data.token = session.token
                                     console.log(data)
-                                    
+                                      
                                     caller.emit('videoCall', data)
                                     receiver.emit('videoCall', data)
                                 }
@@ -116,6 +114,7 @@ class SocketServer{
                         caller.emit('videoCall', data)
                         receiver.emit('videoCall', data)
                         break
+                        
                 }
             })
 

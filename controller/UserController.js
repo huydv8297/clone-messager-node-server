@@ -223,7 +223,8 @@ class UserController {
                                     })
                                 }
                                 else{
-                                    if(emailRep == null)
+                                    
+                                    if(emailRep)
                                         database.updateOneDocument("user", {username: usernameReq}, filter, () => {
                                             respone.json({ message: true })
                                         })
