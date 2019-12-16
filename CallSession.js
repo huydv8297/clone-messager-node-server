@@ -17,7 +17,6 @@ class CallSession {
                 }
                     
                 else{
-                    console.log(session)
                     this.session = session
                     resolve(session)
                 }
