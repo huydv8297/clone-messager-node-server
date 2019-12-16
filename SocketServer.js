@@ -19,15 +19,16 @@ class SocketServer{
             })
 
             client.on('disconnect', client =>{
-                console.log("disconect " + client)
+                console.log(client + " disconect")
             })
 
             client.on('message', dataReq =>{
 
-                console.log("message")
+                
                 let data = JSON.parse(dataReq)
-                console.log(data)
                 console.log("add " + data.from + " to userlist")
+                console.log("new message" + data)
+                
                 this.listUser.set(data.from, client)
 
                 let request = {
@@ -51,7 +52,6 @@ class SocketServer{
                             data.idChat = result.idChat
                             data.timestamp = result.timestamp
                             if(data.type == 4){
-                                console.log("result.type == 4")
                                 callController.getRoom(
                                     session => {
                                         data.content = session.sessionId  + ":" + session.token
@@ -61,7 +61,6 @@ class SocketServer{
                                     }
                                 )
                             }else{
-                                console.log(data)
                                 sender != null ? sender.emit('message', data) : console.log("sender null")
                                 receiver != null ? receiver.emit('message', data) : console.log("receiver null")
                             }
