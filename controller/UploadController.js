@@ -27,6 +27,7 @@ class UploadController{
                 let url = "http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.' + extention
 
                 let newUrl = self.uploadToImageHosting(url)
+                console.log(newUrl)
                 respone.send(newUrl)
             }
                 
@@ -38,8 +39,8 @@ class UploadController{
           .then((res) => {
             //let data = JSON.parse(res)
             let imageUrl = res.data.data.url
-            console.log(imageUrl)
-            return imageUrl
+            
+            return res.data.data.url
           })
           .catch((error) => {
             
