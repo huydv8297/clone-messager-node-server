@@ -9,14 +9,14 @@ class MessageController {
 
     getAllMessages(request, respone){
         let idChat = request.params.idChat
-        let page = parseInt(request.params.page, 10)
+        let page = parseInt(request.params.page, 1)
         let query
         if(idChat)
             query = {_id : ObjectID(idChat)}
         else
             query = {}
 
-        database.getAllDocuments('message', query, {}, value =>{
+        database.getAllDocuments('message', query, {messages: {$slice: [page, 10]}}, value =>{
             if(idChat)
                 respone.json(value[0])
             else

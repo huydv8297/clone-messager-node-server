@@ -56,7 +56,7 @@ class Database {
   getAllDocuments(collectionName, query, filter, callback) {
     const collection = this.db.collection(collectionName)
 
-    var cursor = collection.find(query, filter).limit(10)
+    var cursor = collection.find(query, filter)
     var rows = []
     cursor.each((err, doc) => {
       if (doc == null)
