@@ -34,11 +34,7 @@ class UploadController{
     }
 
     uploadToImageHosting(url){
-        axios.post(uploadApi,{
-            params: {
-                image: url
-          }
-        }
+        axios.get(uploadApi + '&image=' + url
             )
           .then((res) => {
             let data = JSON.parse(res)
