@@ -15,7 +15,6 @@ class CallSession {
                     console.log('Error create session')
                     reject(error)
                 }
-                    
                 else{
                     this.session = session
                     resolve(session)
