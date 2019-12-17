@@ -16,7 +16,7 @@ class MessageController {
         else
             query = {}
 
-        database.getAllDocuments('message', query, {messages: {"$slice": 5}}, value =>{
+        database.getAllDocuments('message', query, {"messages": {"$slice": 5}}, value =>{
             if(idChat)
                 respone.json(value[0])
             else
