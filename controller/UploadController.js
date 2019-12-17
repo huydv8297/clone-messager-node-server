@@ -26,28 +26,25 @@ class UploadController{
             else{
                 let url = "http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.' + extention
 
-                let newUrl = self.uploadToImageHosting(url)
-                console.log(newUrl)
-                respone.send(newUrl)
+                self.uploadToImageHosting(url, imageUrl =>{
+                    console.log(imageUrl)
+                    respone.send(imageUrl)
+                })
             }
-                
         })
     }
 
-    uploadToImageHosting(url){
+    uploadToImageHosting(url, callback){
         axios.get(uploadApi + '&image=' + url)
           .then((res) => {
             //let data = JSON.parse(res)
-            let imageUrl = res.data.data.url
-            
-            return res.data.data.url
+            imageUrl = res.data.data.url
+            callback(imageUrl) 
           })
           .catch((error) => {
-            
             console.error(error)
-            return {message: false}
+            callback({message: false}) 
           })
-        return 
     }
 }
 
