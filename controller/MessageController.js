@@ -48,7 +48,6 @@ class MessageController {
         let timestamp = Math.floor(new Date().getTime())
 
         let query = {_id : ObjectID(chatIdReq)}
-        console.log("insert message")
         let message = {
             from : fromReq,
             to : toReq,
@@ -60,7 +59,6 @@ class MessageController {
         database.pushToArray('message', query, { messages: message }, result =>{
             result.idChat = chatIdReq
             result.timestamp = timestamp
-            console.log("insert message push to array" + result)
             respone.json(result)
         })
     }
