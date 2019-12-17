@@ -38,7 +38,7 @@ class UploadController{
         axios.get(uploadApi + '&image=' + url)
           .then((res) => {
             //let data = JSON.parse(res)
-            imageUrl = res.data.data.url
+            let imageUrl = res.data.data.url
             callback(imageUrl) 
           })
           .catch((error) => {
