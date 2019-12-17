@@ -34,12 +34,11 @@ class UploadController{
     }
 
     uploadToImageHosting(url){
-        axios.get(uploadApi + '&image=' + url
-            )
+        axios.get(uploadApi + '&image=' + url)
           .then((res) => {
-            let data = JSON.parse(res)
-            let imageUrl = data.data.url
-            console.log(imageUrl)
+            //let data = JSON.parse(res)
+            //let imageUrl = data.data.url
+            console.log(res)
             return imageUrl
           })
           .catch((error) => {
