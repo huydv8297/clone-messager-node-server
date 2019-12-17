@@ -38,7 +38,7 @@ class UploadController{
           .then((res) => {
             //let data = JSON.parse(res)
             //let imageUrl = data.data.url
-            console.log(res)
+            console.log(res.data.data.url)
             return imageUrl
           })
           .catch((error) => {
