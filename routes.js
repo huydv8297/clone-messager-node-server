@@ -42,6 +42,10 @@ module.exports = function(app) {
     .post(userController.login)
   
   app.route('/message/:idChat/:page')
+    .get(messageController.getPageMessages)
+    .post(messageController.insertMessage)
+
+  app.route('/message/:idChat')
     .get(messageController.getAllMessages)
     .post(messageController.insertMessage)
 
