@@ -110,6 +110,7 @@ class SocketServer{
 
                         break
                     case 'ACCEPT': case 'CANCEL': case 'FINISH':
+                        console.log('onvideocall case' + dataReq)
                         caller.emit('videoCall', data)
                         receiver.emit('videoCall', data)
                         break
