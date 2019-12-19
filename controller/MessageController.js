@@ -9,18 +9,35 @@ class MessageController {
 
     getAllMessages(request, respone){
         let idChat = request.params.idChat
-        let page = parseInt(request.params.page, 1)
+        let page = request.params.page
         let query
         if(idChat)
             query = {_id : ObjectID(idChat)}
         else
             query = {}
 
-        database.getAllDocuments('message', query, {"messages": {"$slice": [0,0]}}, value =>{
-            if(idChat)
+        database.getAllDocuments('message', query, {}, value =>{
+            if(idChat){
+                let messagePerPage  = 10
+                console.log(value)
+                let messages = value[0].messages
+                let count = Math.floor(messages.length / messagePerPage)
+                let pageCount = messages.length % messagePerPage == 0 ?  count -  1 : count 
+                let endPos = messages.length - messagePerPage * page
+
+                let array = messages.slice(endPos - 10, endPos)
+                
+
+                value[0].messages = array
+                //console.log(parseInt(request.params.page, 1))
+                value[0].pageCount = pageCount
+                
                 respone.json(value[0])
-            else
+            }
+            else{
                 respone.json(value)
+            }
+                
         })
 
         // if(idChat == null){

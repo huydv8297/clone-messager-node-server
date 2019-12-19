@@ -57,6 +57,7 @@ class Database {
     const collection = this.db.collection(collectionName)
 
     var cursor = collection.find(query, filter)
+    
     var rows = []
     cursor.each((err, doc) => {
       if (doc == null)
@@ -65,6 +66,21 @@ class Database {
         rows.push(doc)
     })
   }
+
+  getAllDocumentsAggregate(collectionName, query, filter, callback) {
+    const collection = this.db.collection(collectionName)
+
+    var cursor = collection.aggregate(query, filter)
+    console.log(cursor)
+    var rows = []
+    cursor.each((err, doc) => {
+      if (doc == null)
+        callback(rows)
+      else
+        rows.push(doc)
+    })
+  }
+  
 
   getDocuments(collectionName, query, filter, option, callback) {
     const collection = this.db.collection(collectionName)
