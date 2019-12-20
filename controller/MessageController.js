@@ -50,31 +50,36 @@ class MessageController {
             query = {_id : ObjectID(idChat)}
         else
             query = {}
+        let messagePerPage  = 10
+        let messages = value[0].messages
+        let count = Math.floor(messages.length / messagePerPage)
+        let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
 
-        database.getAllDocuments('message', query, {}, value =>{
-            if(idChat){
-                let messagePerPage  = 10
-                let messages = value[0].messages
-                let count = Math.floor(messages.length / messagePerPage)
-                let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
-                if(page >= pageCount){
-                    value[0].messages = null
-                }else{
-                    let endPos = messages.length - messagePerPage * page
-                    let array = messages.slice(endPos - 10, endPos)
-                    value[0].messages = array
+        if(!isNaN(page) && Number.isInteger(page) && page >= 0)
+            database.getAllDocuments('message', query, {}, value =>{
+                if(idChat){
+                    if(page >= pageCount){
+                        value[0].messages = null
+                    }else{
+                        let endPos = messages.length - messagePerPage * page
+                        let array = messages.slice(endPos - 10, endPos)
+                        value[0].messages = array
+                    }
+                    
+                    //console.log(parseInt(request.params.page, 1))
+                    value[0].pageCount = pageCount
+                    respone.json(value[0])
+                    
                 }
-                
-                //console.log(parseInt(request.params.page, 1))
-                value[0].pageCount = pageCount
-                respone.json(value[0])
-                
-            }
-            else{
-                respone.json(value)
-            }
-                
+                else{
+                    respone.json(value)
+                }     
         })
+        else{
+            value[0].messages = null
+            value[0].pageCount = pageCount
+            respone.json(value[0])
+        }
     }
     // insert message by api
     insertMessage(request, respone){
