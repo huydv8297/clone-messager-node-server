@@ -58,11 +58,11 @@ class MessageController {
                 let count = Math.floor(messages.length / messagePerPage)
                 let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
                 if(page >= pageCount){
+                    value[0].messages = null
+                }else{
                     let endPos = messages.length - messagePerPage * page
                     let array = messages.slice(endPos - 10, endPos)
                     value[0].messages = array
-                }else{
-                    value[0].messages = null
                 }
                 
                 //console.log(parseInt(request.params.page, 1))
