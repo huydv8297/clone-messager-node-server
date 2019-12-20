@@ -51,14 +51,16 @@ class MessageController {
         else
             query = {}
         let messagePerPage  = 10
-        let messages = value[0].messages
-        let count = Math.floor(messages.length / messagePerPage)
-        let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
+        
 
-        if(!isNaN(page) && Number.isInteger(page) && page >= 0)
+        
             database.getAllDocuments('message', query, {}, value =>{
                 if(idChat){
-                    if(page >= pageCount){
+                    let messages = value[0].messages
+                    let count = Math.floor(messages.length / messagePerPage)
+                    let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
+                    if(page >= pageCount || isNaN(page) || !Number.isInteger(page) || page < 0){
+                        
                         value[0].messages = null
                     }else{
                         let endPos = messages.length - messagePerPage * page
@@ -75,11 +77,6 @@ class MessageController {
                     respone.json(value)
                 }     
         })
-        else{
-            value[0].messages = null
-            value[0].pageCount = pageCount
-            respone.json(value[0])
-        }
     }
     // insert message by api
     insertMessage(request, respone){
