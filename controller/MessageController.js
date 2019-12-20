@@ -64,7 +64,8 @@ class MessageController {
 
                     }else{
                         let endPos = messages.length - messagePerPage * page
-                        let array = messages.slice(endPos - 10, endPos)
+                        let startPos = endPos - 10 < 0 ? 0 : endPos - 10
+                        let array = messages.slice(startPos, endPos)
                         value[0].messages = array
                     }
                     
