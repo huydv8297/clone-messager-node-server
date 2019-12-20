@@ -61,7 +61,7 @@ class MessageController {
                     let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
                     if(page >= pageCount || isNaN(page) || !Number.isInteger(page) || page < 0){
                         
-                        value[0].messages = null
+                        value[0].messages = page >= pageCount + " " + isNaN(page) + " " + !Number.isInteger(page) + " " + page < 0
                     }else{
                         let endPos = messages.length - messagePerPage * page
                         let array = messages.slice(endPos - 10, endPos)
