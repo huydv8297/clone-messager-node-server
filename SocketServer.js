@@ -13,7 +13,7 @@ class SocketServer{
 
             client.on('username', dataReq =>{
                 let data = JSON.parse(dataReq)
-                console.log(dataReq)
+                //console.log(dataReq)
                 console.log("add " + data.username + " to list")
                 this.listUser.set(data.username, client)
             })
@@ -27,7 +27,7 @@ class SocketServer{
                 
                 let data = JSON.parse(dataReq)
                 console.log("add " + data.from + " to userlist")
-                console.log("new message" + data)
+                //console.log("new message" + data)
                 
                 this.listUser.set(data.from, client)
 

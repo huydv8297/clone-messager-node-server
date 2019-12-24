@@ -58,6 +58,8 @@ class MessageController {
                     let messages = value[0].messages
                     let count = Math.floor(messages.length / messagePerPage)
                     let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
+
+                    //convert string to number
                     let pageNumber = +page
   
                     if(isNaN(page) || page.indexOf(".") > -1 || pageNumber > pageCount || pageNumber < 0 || !Number.isInteger(pageNumber)){
