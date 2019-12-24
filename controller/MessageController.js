@@ -70,7 +70,7 @@ class MessageController {
                     }
                     
                     //console.log(parseInt(request.params.page, 1))
-                    value[0].pageCount = pageCount
+                    value[0].pageCount = pageCount + 1
                     respone.json(value[0])
                     
                 }
