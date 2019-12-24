@@ -45,6 +45,7 @@ class MessageController {
     getPageMessages(request, respone){
         let idChat = request.params.idChat
         let page = request.params.page
+        
         let query
         if(idChat)
             query = {_id : ObjectID(idChat)}
@@ -52,14 +53,14 @@ class MessageController {
             query = {}
         let messagePerPage  = 10
         
-
-        
             database.getAllDocuments('message', query, {}, value =>{
                 if(idChat){
                     let messages = value[0].messages
                     let count = Math.floor(messages.length / messagePerPage)
                     let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
-                    if(page > pageCount || isNaN(page) || page < 0 || !Number.isInteger(page)){
+                    let pageNumber = +page
+  
+                    if(isNaN(page) || page.indexOf(".") > -1 || pageNumber > pageCount || pageNumber < 0 || !Number.isInteger(pageNumber)){
                         value[0].messages = null
 
                     }else{
