@@ -59,7 +59,7 @@ class MessageController {
                     let messages = value[0].messages
                     let count = Math.floor(messages.length / messagePerPage)
                     let pageCount = messages.length % messagePerPage == 0 ?  count - 1 : count
-                    if(page > pageCount || isNaN(page) || page < 0 || Number.isInteger(page)){
+                    if(page > pageCount || isNaN(page) || page < 0 || !Number.isInteger(page)){
                         value[0].messages = null
 
                     }else{
