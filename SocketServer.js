@@ -15,7 +15,7 @@ class SocketServer{
                 let data = JSON.parse(dataReq)
                 //console.log(dataReq)
                 console.log("add " + data.username + " to list")
-                this.listUser.set(data.username, client)
+                this.listUser.set(data.username, client.id)
             })
 
             client.on('disconnect', client =>{
@@ -46,7 +46,7 @@ class SocketServer{
 
                 let respone = {
                     json: result =>{
-                        let sender = client
+                        let sender = client.id
                         let receiver = this.listUser.get(data.to)
                         if(result.idChat){
                             data.idChat = result.idChat
@@ -56,13 +56,13 @@ class SocketServer{
                                     session => {
                                         data.content = session.sessionId  + ":" + session.token
 
-                                        sender != null ? sender.emit('message', data) : console.log("sender null")
-                                        receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                                        sender != null ? this.socketIO.to(sender).emit('message', data) : console.log("sender null")
+                                        receiver != null ? this.socketIO.to(receiver).emit('message', data) : console.log("receiver null")
                                     }
                                 )
                             }else{
-                                sender != null ? sender.emit('message', data) : console.log("sender null")
-                                receiver != null ? receiver.emit('message', data) : console.log("receiver null")
+                                sender != null ? this.socketIO.to(sender).emit('message', data) : console.log("sender null")
+                                receiver != null ? this.socketIO.to(receiver).emit('message', data) : console.log("receiver null")
                             }
                             //     sender != null ? sender.emit('message', data) : console.log("sender null")
                             //     receiver != null ? receiver.emit('message', data) : console.log("receiver null")
@@ -100,8 +100,8 @@ class SocketServer{
                                     data.token = session.token
                                     console.log(data)
                                       
-                                    caller.emit('videoCall', data)
-                                    receiver.emit('videoCall', data)
+                                    this.socketIO.to(caller).emit('videoCall', data)
+                                    this.socketIO.to(receiver).emit('videoCall', data)
                                 }
                             )
                         } 
@@ -111,8 +111,8 @@ class SocketServer{
                         break
                     case 'ACCEPT': case 'CANCEL': case 'FINISH':
                         console.log('onvideocall case' + dataReq)
-                        caller.emit('videoCall', data)
-                        receiver.emit('videoCall', data)
+                        this.socketIO.to(caller).emit('videoCall', data)
+                        this.socketIO.to(receiver).emit('videoCall', data)
                         break
                 }
             })
