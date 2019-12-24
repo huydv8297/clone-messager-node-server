@@ -114,7 +114,6 @@ class SocketServer{
                         caller.emit('videoCall', data)
                         receiver.emit('videoCall', data)
                         break
-                        
                 }
             })
 
