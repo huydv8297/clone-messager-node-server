@@ -4,7 +4,7 @@ const database = require('../Database')
 const path = require('path')
 const API_KEY = 'dced7270c9e4c55f1de9b395abdf3907'
 const axios = require('axios')
-const drive = require('googleapis')
+const google = require('googleapis')
 const uploadApi = 'https://api.imgbb.com/1/upload?key=' + API_KEY
 const driveDownloadUrl = 'https://drive.google.com/uc?id=1HBT7HbI9oyTmvqQL--ImgB5d0Ob_dtVh&export=download'
 
@@ -60,7 +60,7 @@ class UploadController{
             body: fs.createReadStream('../uploads/8e3799059103eb57d1aa470499345bc9.png')
           };
           console.error('uploadToDrive')
-          drive.file.create({
+          drive.files.create({
             resource: fileMetadata,
             media: media,
             fields: 'id'
