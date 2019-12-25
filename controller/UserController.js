@@ -216,8 +216,6 @@ class UserController {
                         database.getOneDocument("user", query, {})
                             .then(result =>{
                                 console.log("update info")
-                                console.log(result)
-                                console.log(!result)
                                 if(!result){
                                     console.log("email not found")
                                     database.updateOneDocument("user", {username: usernameReq}, filter, () => {
@@ -226,7 +224,7 @@ class UserController {
                                 }
                                 else{
                                     
-                                    if(emailRep){
+                                    if(!emailRep){
                                         console.log("email null")
                                         database.updateOneDocument("user", {username: usernameReq}, filter, () => {
                                             respone.json({ message: true })
