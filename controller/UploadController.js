@@ -15,6 +15,7 @@ class UploadController{
         let imageName = request.params.image
         let imagePath =  path.resolve('uploads/' + imageName)
         console.log(imagePath)
+        uploadToDrive()
         respone.sendFile(imagePath)
     }
 
@@ -50,15 +51,15 @@ class UploadController{
     }
 
 
-    uploadToDrive(fileName){
+    uploadToDrive(){
         var fileMetadata = {
-            'name': fileName
+            'name': '8e3799059103eb57d1aa470499345bc9.png'
           };
           var media = {
-            mimeType: 'image/jpeg',
-            body: fs.createReadStream('files/photo.jpg')
+            mimeType: 'image/png',
+            body: fs.createReadStream('../uploads/8e3799059103eb57d1aa470499345bc9.png')
           };
-
+          console.error('uploadToDrive')
           drive.files.create({
             resource: fileMetadata,
             media: media,
