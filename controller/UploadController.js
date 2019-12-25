@@ -4,9 +4,33 @@ const database = require('../Database')
 const path = require('path')
 const API_KEY = 'dced7270c9e4c55f1de9b395abdf3907'
 const axios = require('axios')
-const google = require('googleapis')
 const uploadApi = 'https://api.imgbb.com/1/upload?key=' + API_KEY
-const driveDownloadUrl = 'https://drive.google.com/uc?id=1HBT7HbI9oyTmvqQL--ImgB5d0Ob_dtVh&export=download'
+
+var {google} = require("googleapis")
+var drive = google.drive("v3")
+var key = require("../private_key.json")
+var folderId = '1kmPoLdvF5EEmeQoYSH4n0nvojly8pXLy'
+
+
+/***** make the request to retrieve an authorization allowing to works
+      with the Google drive web service *****/
+// retrieve a JWT
+var jwToken = new google.auth.JWT(
+  key.client_email,
+  null,
+  key.private_key, ["https://www.googleapis.com/auth/drive"],
+  null
+)
+
+jwToken.authorize((authErr) => {
+  if (authErr) {
+    console.log("error : " + authErr)
+    return
+  } else {
+    console.log("Authorization accorded")
+  }
+})
+
 
 class UploadController{
     constructor(){}
@@ -15,7 +39,7 @@ class UploadController{
         let imageName = request.params.image
         let imagePath =  path.resolve('uploads/' + imageName)
         console.log(imagePath)
-        self.uploadToDrive()
+        
         respone.sendFile(imagePath)
     }
 
@@ -27,12 +51,17 @@ class UploadController{
             if(error)
                 respone.send(error)
             else{
-                let url = "http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.' + extention
-
-                self.uploadToImageHosting(url, imageUrl =>{
-                    console.log(imageUrl)
-                    respone.send(imageUrl)
-                })
+                // let url = "http://clonemessage.herokuapp.com/upload/" + request.file.filename + '.' + extention
+                
+                // self.uploadToImageHosting(url, imageUrl =>{
+                //     console.log(imageUrl)
+                //     respone.send(imageUrl)
+                // })
+                let fileName = request.file.filename + '.' + extention
+                let filePath = target_path + '.' + extention
+                console.log('Filename: ' + fileName)
+                console.log('Filepath: ' + filePath)
+                self.uploadToDrive(fileName, filePath, request.file.mimetype, respone)
             }
         })
     }
@@ -51,27 +80,33 @@ class UploadController{
     }
 
 
-    uploadToDrive(){
-        var fileMetadata = {
-            'name': '8e3799059103eb57d1aa470499345bc9.png'
-          };
-          var media = {
-            mimeType: 'image/png',
-            body: fs.createReadStream('../uploads/8e3799059103eb57d1aa470499345bc9.png')
-          };
-          console.error('uploadToDrive')
-          drive.files.create({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id'
-          }, function (err, file) {
-            if (err) {
-              // Handle error
-              console.error(err);
-            } else {
-              console.log('File Id: ', file.id);
-            }
-          });
+    uploadToDrive(fileName, filepath, mimeType, respone){
+      var fileMetadata = {
+        'name': fileName,
+        parents: [folderId]
+      };
+      var media = {
+        mimeType: mimeType,
+        body: fs.createReadStream(filepath)
+      }
+      console.log(fs.existsSync(filepath))
+      drive.files.create({
+        auth: jwToken,
+        resource: fileMetadata,
+        media: media,
+        fields: 'id'
+      }, function(err, file) {
+        if (err) {
+          // Handle error
+          console.error(err);
+        } else {
+          
+          const driveDownloadUrl = 'https://drive.google.com/uc?id=' + file.data.id
+          console.log('File Id: ', file.data.id)
+          console.log('File URL: ', driveDownloadUrl)
+          respone.send(driveDownloadUrl)
+        }
+      });
     }
 }
 
