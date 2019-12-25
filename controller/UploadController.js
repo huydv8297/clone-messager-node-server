@@ -46,16 +46,18 @@ class UploadController{
 
     uploadImage(request, respone){
         let target_path = path.resolve('uploads/' + request.file.filename)
-        let extention = ''
-        if(request.file.mimetype.includes("image")){
-          extention = request.file.mimetype.replace("image/", "")
-        }
+        console.log(request.file)
+        // if(request.file.mimetype.includes("image")){
+        //   extention = request.file.mimetype.replace("image/", "")
+        // }
 
-        if(request.file.mimetype.includes("video")){
-          extention = request.file.mimetype.replace("video/", "")
-        }
+        // if(request.file.mimetype.includes("video")){
+        //   extention = request.file.mimetype.replace("video/", "")
+        // }
 
-        fs.rename(target_path, target_path + "." + extention, error =>{
+        let fileName = request.file.originalname
+
+        fs.rename(target_path, path.resolve('uploads/' + fileName), error =>{
             if(error)
                 respone.send(error)
             else{
@@ -65,8 +67,7 @@ class UploadController{
                 //     console.log(imageUrl)
                 //     respone.send(imageUrl)
                 // })
-                let fileName = request.file.filename + '.' + extention
-                let filePath = target_path + '.' + extention
+                let filePath = path.resolve('uploads/' + fileName)
                 console.log('Filename: ' + fileName)
                 console.log('Filepath: ' + filePath)
                 self.uploadToDrive(fileName, filePath, request.file.mimetype, respone)
