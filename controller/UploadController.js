@@ -60,7 +60,7 @@ class UploadController{
             body: fs.createReadStream('../uploads/8e3799059103eb57d1aa470499345bc9.png')
           };
           console.error('uploadToDrive')
-          drive.files.create({
+          drive.file.create({
             resource: fileMetadata,
             media: media,
             fields: 'id'
