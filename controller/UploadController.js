@@ -15,7 +15,7 @@ class UploadController{
         let imageName = request.params.image
         let imagePath =  path.resolve('uploads/' + imageName)
         console.log(imagePath)
-        uploadToDrive()
+        self.uploadToDrive()
         respone.sendFile(imagePath)
     }
 
