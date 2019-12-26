@@ -19,7 +19,7 @@ class SocketServer{
             })
 
             client.on('disconnect', client =>{
-                console.log(client + " disconect")
+                console.log(client.id + " disconect")
             })
 
             client.on('message', dataReq =>{
