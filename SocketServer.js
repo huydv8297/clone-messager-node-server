@@ -29,7 +29,7 @@ class SocketServer{
                 console.log("add " + data.from + " to userlist")
                 //console.log("new message" + data)
                 
-                this.listUser.set(data.from, client)
+                //this.listUser.set(data.from, client)
 
                 let request = {
                     params: {
