@@ -1,6 +1,8 @@
 'use strict'
 var fs = require('fs');
 const database = require('../Database')
+const ObjectID = require('mongodb').ObjectID;
+
 const path = require('path')
 const documentName = 'story'
 const prefixPath = '\\w+\\.\\w+$'
@@ -13,7 +15,7 @@ class StoryController{
         let storyId = request.params.storyId
         let timeStart = Math.floor(new Date().getTime()) - aDayTime
         console.log(storyId)
-        database.getOneDocument(documentName, {storyId: storyId, timestamp: {$gt: timeStart}},{})
+        database.getOneDocument(documentName, {_id: ObjectID(storyId), timestamp: {$gt: timeStart}},{})
             .then(result => respone.json(result))
     }
 
@@ -36,10 +38,7 @@ class StoryController{
         let imagePath = request.body.imagePath
         let timestamp = Math.floor(new Date().getTime())
         //let storyId = imagePath.replace(new RegExp(prefixPath), "").replace(new RegExp(extention), "")
-        let storyId = imagePath.substring(imagePath.lastIndexOf("/") + 1, imagePath.lastIndexOf("."))
-        console.log(storyId)
         let story = {
-            storyId: storyId,
             imagePath: imagePath,
             listView: [],
             timestamp: timestamp
